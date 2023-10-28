@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myxpenses/core/presentation/navigation/app_router.dart';
 
-class MyXpensesApp extends StatelessWidget {
+class MyXpensesApp extends ConsumerWidget {
   const MyXpensesApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(appRouterProvider);
+    return MaterialApp.router(
       title: 'myXpenses',
-      home: Scaffold(),
+      routerConfig: router.routerConfig,
     );
   }
 }

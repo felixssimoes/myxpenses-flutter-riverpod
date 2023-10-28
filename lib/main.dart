@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'core/presentation/app/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myxpenses/core/core.dart';
 
 void main() {
-  runApp(const MyXpensesApp());
+  runApp(ProviderScope(
+    observers: [RiverpodLogger(true)],
+    child: const MyXpensesApp(),
+  ));
 }

@@ -2,3 +2,22 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    sort_pub_dependencies: false
+    directives_ordering: true
+
+analyzer:
+  plugins:
+    - custom_lint
+  errors:
+    missing_return: error
+    must_be_immutable: error
+    missing_required_param: error
+    invalid_use_of_visible_for_testing_member: error
+    sort_unnamed_constructors_first: ignore
+    invalid_annotation_target: ignore
+    library_private_types_in_public_api: ignore
+  exclude:
+    - 'bricks/**/*.*'
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+    - '**/*.mocks.dart'
