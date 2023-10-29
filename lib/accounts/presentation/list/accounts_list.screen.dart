@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myxpenses/accounts/data/accounts.repository.dart';
 import 'package:myxpenses/core/core.dart';
 
 import '../../application/accounts.notifiers.dart';
@@ -15,9 +14,7 @@ class AccountsListScreen extends ConsumerWidget {
         title: const Text('Accounts'),
         actions: [
           IconButton(
-            onPressed: () {
-              ref.read(accountsRepositoryProvider).createAccount(name: 'name');
-            },
+            onPressed: () => ref.read(appRouterProvider).openCreateAccount(),
             icon: const Icon(
               Icons.add,
               color: Colors.white,

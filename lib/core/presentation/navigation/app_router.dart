@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -29,15 +29,33 @@ class AppRouter {
     _router.pop();
   }
 
+  void openCreateAccount() {
+    _router.goNamed(Routes.createAccount.name);
+  }
+
   void _setupRoutes() {
     _router = GoRouter(
       debugLogDiagnostics: true,
       navigatorKey: ref.watch(navigatorKeyProvider),
-      initialLocation: Routes.home.path,
+      initialLocation: Routes.accountsList.path,
+      redirect: (context, state) =>
+          state.matchedLocation == '/' ? Routes.accountsList.path : null,
       routes: [
         GoRoute(
-          path: Routes.home.path,
+          path: Routes.accountsList.path,
+          name: Routes.accountsList.name,
           builder: (context, state) => const AccountsListScreen(),
+          routes: [
+            GoRoute(
+              path: Routes.createAccount.path,
+              name: Routes.createAccount.name,
+              pageBuilder: (context, state) => MaterialPage<void>(
+                key: state.pageKey,
+                fullscreenDialog: true,
+                child: const CreateAccountScreen(),
+              ),
+            ),
+          ],
         ),
       ],
     );

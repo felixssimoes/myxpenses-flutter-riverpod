@@ -1,5 +1,7 @@
 enum Routes {
-  home('/'),
+  // accounts
+  accountsList('/accounts'),
+  createAccount('create'),
 
   dummy('');
 
