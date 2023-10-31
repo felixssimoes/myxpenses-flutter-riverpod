@@ -29,6 +29,10 @@ class AppRouter {
     _router.pop();
   }
 
+  void goHome() {
+    _router.go('/');
+  }
+
   void openCreateAccount() {
     _router.goNamed(Routes.createAccount.name);
   }

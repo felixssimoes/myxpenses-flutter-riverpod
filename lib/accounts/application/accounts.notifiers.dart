@@ -9,7 +9,11 @@ Stream<List<AccountModel>> accounts(AccountsRef ref) =>
     ref.watch(accountsRepositoryProvider).watchAccounts;
 
 @Riverpod(keepAlive: true)
-Future<AccountModel> account(AccountRef ref, String accountId) async {
+Future<AccountModel?> account(AccountRef ref, String accountId) async {
   final accounts = await ref.watch(accountsProvider.future);
-  return accounts.firstWhere((account) => account.id == accountId);
+  try {
+    return (accounts).firstWhere((account) => account.id == accountId);
+  } catch (e) {
+    return null;
+  }
 }

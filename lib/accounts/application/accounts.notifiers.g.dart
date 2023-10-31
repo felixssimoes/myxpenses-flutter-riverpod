@@ -20,7 +20,7 @@ final accountsProvider = StreamProvider<List<AccountModel>>.internal(
 );
 
 typedef AccountsRef = StreamProviderRef<List<AccountModel>>;
-String _$accountHash() => r'a0e6a616f2e9dac7881cd72baa7c57cbd54c9d71';
+String _$accountHash() => r'ec48e888f53e0eac41fc3a56b8a5ed6615c24f77';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -48,7 +48,7 @@ class _SystemHash {
 const accountProvider = AccountFamily();
 
 /// See also [account].
-class AccountFamily extends Family<AsyncValue<AccountModel>> {
+class AccountFamily extends Family<AsyncValue<AccountModel?>> {
   /// See also [account].
   const AccountFamily();
 
@@ -86,7 +86,7 @@ class AccountFamily extends Family<AsyncValue<AccountModel>> {
 }
 
 /// See also [account].
-class AccountProvider extends FutureProvider<AccountModel> {
+class AccountProvider extends FutureProvider<AccountModel?> {
   /// See also [account].
   AccountProvider(
     String accountId,
@@ -120,7 +120,7 @@ class AccountProvider extends FutureProvider<AccountModel> {
 
   @override
   Override overrideWith(
-    FutureOr<AccountModel> Function(AccountRef provider) create,
+    FutureOr<AccountModel?> Function(AccountRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -137,7 +137,7 @@ class AccountProvider extends FutureProvider<AccountModel> {
   }
 
   @override
-  FutureProviderElement<AccountModel> createElement() {
+  FutureProviderElement<AccountModel?> createElement() {
     return _AccountProviderElement(this);
   }
 
@@ -155,12 +155,12 @@ class AccountProvider extends FutureProvider<AccountModel> {
   }
 }
 
-mixin AccountRef on FutureProviderRef<AccountModel> {
+mixin AccountRef on FutureProviderRef<AccountModel?> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
-class _AccountProviderElement extends FutureProviderElement<AccountModel>
+class _AccountProviderElement extends FutureProviderElement<AccountModel?>
     with AccountRef {
   _AccountProviderElement(super.provider);
 
