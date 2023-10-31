@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
+import 'package:myxpenses/core/core.dart';
 
 class AccountDetailsScreen extends ConsumerWidget {
   const AccountDetailsScreen({
@@ -16,6 +17,13 @@ class AccountDetailsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(accountValue.valueOrNull?.name ?? ''),
+        actions: [
+          IconButton(
+            onPressed: () =>
+                ref.read(appRouterProvider).openEditAccount(accountId),
+            icon: const Icon(Icons.settings),
+          )
+        ],
       ),
     );
   }

@@ -40,6 +40,13 @@ class AppRouter {
     );
   }
 
+  void openEditAccount(String accountId) {
+    _router.goNamed(
+      Routes.editAccount.name,
+      pathParameters: {'account_id': accountId},
+    );
+  }
+
   void _setupRoutes() {
     _router = GoRouter(
       debugLogDiagnostics: true,
@@ -67,6 +74,17 @@ class AppRouter {
               name: Routes.accountDetails.name,
               builder: (context, state) => AccountDetailsScreen(
                 accountId: state.pathParameters['account_id']!,
+              ),
+            ),
+            GoRoute(
+              path: Routes.editAccount.path,
+              name: Routes.editAccount.name,
+              pageBuilder: (context, state) => MaterialPage<void>(
+                key: state.pageKey,
+                fullscreenDialog: true,
+                child: EditAccountScreen(
+                  accountId: state.pathParameters['account_id']!,
+                ),
               ),
             ),
           ],
