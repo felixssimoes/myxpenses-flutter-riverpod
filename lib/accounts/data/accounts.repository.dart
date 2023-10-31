@@ -15,20 +15,19 @@ class AccountsRepository {
   AccountsRepository(this._ref) {
     loadAccounts();
   }
-  final AccountsRepositoryRef _ref;
 
-  Uuid get uuidGenerator => _ref.read(uuidGeneratorProvider);
+  final AccountsRepositoryRef _ref;
+  Uuid get _uuidGenerator => _ref.read(uuidGeneratorProvider);
 
   final _accounts = <AccountModel>[];
   final _accountsSubject = BehaviorSubject<List<AccountModel>>();
 
   List<AccountModel> get accounts => _accounts;
-
   Stream<List<AccountModel>> get watchAccounts => _accountsSubject.stream;
 
   Future<AccountModel> createAccount({required String name}) async {
     final account = AccountModel(
-      id: uuidGenerator.v4(),
+      id: _uuidGenerator.v4(),
       name: name,
     );
     _accounts.add(account);
