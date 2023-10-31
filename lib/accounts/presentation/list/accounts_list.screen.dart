@@ -31,7 +31,13 @@ class AccountsListScreen extends ConsumerWidget {
                 itemCount: accounts.length,
                 itemBuilder: (context, index) {
                   final account = accounts[index];
-                  return ListTile(title: Text(account.name));
+                  return ListTile(
+                    title: Text(account.name),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => ref
+                        .read(appRouterProvider)
+                        .openAccountDetails(account.id),
+                  );
                 },
               ),
       ),

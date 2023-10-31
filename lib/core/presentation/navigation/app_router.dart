@@ -33,6 +33,13 @@ class AppRouter {
     _router.goNamed(Routes.createAccount.name);
   }
 
+  void openAccountDetails(String accountId) {
+    _router.goNamed(
+      Routes.accountDetails.name,
+      pathParameters: {'account_id': accountId},
+    );
+  }
+
   void _setupRoutes() {
     _router = GoRouter(
       debugLogDiagnostics: true,
@@ -53,6 +60,13 @@ class AppRouter {
                 key: state.pageKey,
                 fullscreenDialog: true,
                 child: const CreateAccountScreen(),
+              ),
+            ),
+            GoRoute(
+              path: Routes.accountDetails.path,
+              name: Routes.accountDetails.name,
+              builder: (context, state) => AccountDetailsScreen(
+                accountId: state.pathParameters['account_id']!,
               ),
             ),
           ],
