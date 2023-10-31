@@ -7,7 +7,7 @@ import '../domain/account.model.dart';
 
 part 'accounts.repository.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AccountsRepository accountsRepository(AccountsRepositoryRef ref) =>
     AccountsRepository(ref);
 

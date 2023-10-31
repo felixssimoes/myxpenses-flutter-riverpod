@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myxpenses/accounts/accounts.dart';
+import 'package:myxpenses/accounts/presentation/widgets/account_name_form_field.dart';
 
-class EditAccountScreen extends ConsumerWidget {
+import 'edit_account.controller.dart';
+
+class EditAccountScreen extends ConsumerStatefulWidget {
   const EditAccountScreen({
     required this.accountId,
     super.key,
@@ -10,13 +14,58 @@ class EditAccountScreen extends ConsumerWidget {
   final String accountId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EditAccountScreen> createState() => _EditAccountScreenState();
+}
+
+class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final accountValue = ref.read(accountProvider(widget.accountId));
+    _nameController.text = accountValue.valueOrNull?.name ?? '';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(editAccountControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Account'),
       ),
-      body: const Center(
-        child: Text('Edit Account'),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              AccountNameFormField(
+                accountId: widget.accountId,
+                controller: _nameController,
+              ),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: state.isLoading
+                    ? null
+                    : () async {
+                        FocusScope.of(context).unfocus();
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                        await ref
+                            .read(editAccountControllerProvider.notifier)
+                            .updateAccount(
+                              accountId: widget.accountId,
+                              name: _nameController.text,
+                            );
+                      },
+                child: const Text('Update Account'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -6,11 +6,11 @@ part of 'accounts.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$accountsHash() => r'6fe4f2753e389d9acf08faf8582db71ade73d806';
+String _$accountsHash() => r'329e9580934b8a733a5ddf67b92790a35311dac9';
 
 /// See also [accounts].
 @ProviderFor(accounts)
-final accountsProvider = AutoDisposeStreamProvider<List<AccountModel>>.internal(
+final accountsProvider = StreamProvider<List<AccountModel>>.internal(
   accounts,
   name: r'accountsProvider',
   debugGetCreateSourceHash:
@@ -19,8 +19,8 @@ final accountsProvider = AutoDisposeStreamProvider<List<AccountModel>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef AccountsRef = AutoDisposeStreamProviderRef<List<AccountModel>>;
-String _$accountHash() => r'3b83ffc11429f1d0ccd37a93abb66ce4a7f2cfc2';
+typedef AccountsRef = StreamProviderRef<List<AccountModel>>;
+String _$accountHash() => r'a0e6a616f2e9dac7881cd72baa7c57cbd54c9d71';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -86,7 +86,7 @@ class AccountFamily extends Family<AsyncValue<AccountModel>> {
 }
 
 /// See also [account].
-class AccountProvider extends AutoDisposeFutureProvider<AccountModel> {
+class AccountProvider extends FutureProvider<AccountModel> {
   /// See also [account].
   AccountProvider(
     String accountId,
@@ -137,7 +137,7 @@ class AccountProvider extends AutoDisposeFutureProvider<AccountModel> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<AccountModel> createElement() {
+  FutureProviderElement<AccountModel> createElement() {
     return _AccountProviderElement(this);
   }
 
@@ -155,13 +155,13 @@ class AccountProvider extends AutoDisposeFutureProvider<AccountModel> {
   }
 }
 
-mixin AccountRef on AutoDisposeFutureProviderRef<AccountModel> {
+mixin AccountRef on FutureProviderRef<AccountModel> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
-class _AccountProviderElement
-    extends AutoDisposeFutureProviderElement<AccountModel> with AccountRef {
+class _AccountProviderElement extends FutureProviderElement<AccountModel>
+    with AccountRef {
   _AccountProviderElement(super.provider);
 
   @override

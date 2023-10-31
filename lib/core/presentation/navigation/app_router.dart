@@ -41,7 +41,7 @@ class AppRouter {
   }
 
   void openEditAccount(String accountId) {
-    _router.goNamed(
+    _router.pushNamed(
       Routes.editAccount.name,
       pathParameters: {'account_id': accountId},
     );

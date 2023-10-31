@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 
+import '../widgets/account_name_form_field.dart';
 import 'create_account.controller.dart';
 
 class CreateAccountScreen extends ConsumerStatefulWidget {
@@ -34,24 +34,9 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  TextFormField(
+                  AccountNameFormField(
                     enabled: !state.isLoading,
                     controller: _nameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Account Name',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter an account name';
-                      }
-                      if (ref
-                          .read(accountsRepositoryProvider)
-                          .accounts
-                          .any((a) => a.name == value)) {
-                        return 'Account name already exists';
-                      }
-                      return null;
-                    },
                   ),
                   const Spacer(),
                   ElevatedButton(

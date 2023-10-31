@@ -4,11 +4,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'accounts.notifiers.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Stream<List<AccountModel>> accounts(AccountsRef ref) =>
     ref.watch(accountsRepositoryProvider).watchAccounts;
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<AccountModel> account(AccountRef ref, String accountId) async {
   final accounts = await ref.watch(accountsProvider.future);
   return accounts.firstWhere((account) => account.id == accountId);
