@@ -25,7 +25,7 @@ class _CreateAccountScreenState extends ConsumerState<CreateAccountScreen> {
     );
     final state = ref.watch(createAccountControllerProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Create Account')),
+      appBar: AppBar(title: const Text('New Account')),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Stack(

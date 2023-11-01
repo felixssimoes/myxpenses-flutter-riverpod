@@ -5,7 +5,7 @@ import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 
 import '../../../_helpers/mocks/mocks.dart';
-import '../../accounts_robot.dart';
+import 'accounts_list.screen.robot.dart';
 import 'accounts_list.screen_test.mocks.dart';
 
 @GenerateMocks([
@@ -21,7 +21,7 @@ void main() {
       final a2 = mockAccountModel();
       when(repository.watchAccounts).thenAnswer((_) => Stream.value([a1, a2]));
 
-      final r = AccountsRobot(tester);
+      final r = AccountsListScreenRobot(tester);
       await r.pumpAccountsListScreen(
         repository: repository,
         appRouter: appRouter,
@@ -48,7 +48,7 @@ void main() {
       final appRouter = MockAppRouter();
       when(repository.watchAccounts).thenAnswer((_) => Stream.value([]));
 
-      final r = AccountsRobot(tester);
+      final r = AccountsListScreenRobot(tester);
       await r.pumpAccountsListScreen(
         repository: repository,
         appRouter: appRouter,
