@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myxpenses/accounts/domain/account.model.dart';
 import 'package:myxpenses/core/core.dart';
 
 import '../../application/accounts.notifiers.dart';
+import 'widgets/accounts_list_tile.dart';
 
 class AccountsListScreen extends ConsumerWidget {
   const AccountsListScreen({super.key});
@@ -44,26 +44,6 @@ class AccountsListScreen extends ConsumerWidget {
                 },
               ),
       ),
-    );
-  }
-}
-
-class AccountListTile extends StatelessWidget {
-  const AccountListTile({
-    required this.account,
-    required this.onTap,
-    super.key,
-  });
-
-  final AccountModel account;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(account.name),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: onTap,
     );
   }
 }

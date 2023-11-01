@@ -28,6 +28,7 @@ void main() {
       );
 
       r.expectFindNAccounts(2);
+      r.expectFindEmptyState(false);
       verify(repository.watchAccounts);
       verifyZeroInteractions(appRouter);
 
@@ -40,6 +41,24 @@ void main() {
       verify(appRouter.openAccountDetails(a1.id));
       verifyNoMoreInteractions(appRouter);
       verifyNoMoreInteractions(repository);
+    });
+
+    testWidgets('empty state', (tester) async {
+      final repository = MockAccountsRepository();
+      final appRouter = MockAppRouter();
+      when(repository.watchAccounts).thenAnswer((_) => Stream.value([]));
+
+      final r = AccountsRobot(tester);
+      await r.pumpAccountsListScreen(
+        repository: repository,
+        appRouter: appRouter,
+      );
+
+      r.expectFindNAccounts(0);
+      r.expectFindEmptyState(true);
+      verify(repository.watchAccounts);
+      verifyNoMoreInteractions(repository);
+      verifyZeroInteractions(appRouter);
     });
   });
 }
