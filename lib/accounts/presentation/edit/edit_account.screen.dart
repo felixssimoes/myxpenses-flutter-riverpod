@@ -62,6 +62,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
       editAccountControllerProvider,
       (_, state) => state.showAlertDialogOnError(context),
     );
+    ref.listen(accountProvider(widget.accountId), (previous, next) {
+      _nameController.text = next.valueOrNull?.name ?? '';
+    });
     final state = ref.watch(editAccountControllerProvider);
     return Scaffold(
       appBar: AppBar(
