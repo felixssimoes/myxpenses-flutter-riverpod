@@ -33,18 +33,27 @@ class AccountsListScreenRobot {
     expect(finder, findsNWidgets(count));
   }
 
+  void expectFindAccount(String name, {bool visible = true}) {
+    final finder = find.text(name);
+    expect(finder, visible ? findsOneWidget : findsNothing);
+  }
+
   void expectFindEmptyState(bool visible) {
     final finder = find.text('no accounts created yet');
     expect(finder, visible ? findsOneWidget : findsNothing);
   }
 
   Future<void> tapAddAccountButton() async {
-    await tester.tap(find.byKey(AccountsListScreen.addAccountKey));
+    final finder = find.byKey(AccountsListScreen.addAccountKey);
+    expect(finder, findsOneWidget);
+    await tester.tap(finder);
     await tester.pumpAndSettle();
   }
 
   Future<void> tapAccountTile(int index) async {
-    await tester.tap(find.byType(AccountListTile).at(index));
+    final finder = find.byType(AccountListTile).at(index);
+    expect(finder, findsOneWidget);
+    await tester.tap(finder);
     await tester.pumpAndSettle();
   }
 }
