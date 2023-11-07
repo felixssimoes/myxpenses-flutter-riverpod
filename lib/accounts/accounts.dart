@@ -1,5 +1,5 @@
 export 'application/accounts.notifiers.dart';
-export 'data/accounts.repository.dart';
+export 'data/accounts.data.dart';
 export 'domain/account.model.dart';
 export 'presentation/create/create_account.screen.dart';
 export 'presentation/details/account_details.screen.dart';

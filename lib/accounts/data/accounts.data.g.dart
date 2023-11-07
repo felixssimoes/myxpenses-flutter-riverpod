@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'accounts.repository.dart';
+part of 'accounts.data.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
 String _$accountsRepositoryHash() =>
-    r'ac25ad4d73e7f407ed42c70f944087dfff40ab29';
+    r'cea74e84fef40290c8a803632973ef62cf9f4b37';
 
 /// See also [accountsRepository].
 @ProviderFor(accountsRepository)

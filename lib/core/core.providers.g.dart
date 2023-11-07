@@ -6,11 +6,11 @@ part of 'core.providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$uuidGeneratorHash() => r'5cc4667f1c3cb461dc8545f4c4e714cdd65f8cb4';
+String _$uuidGeneratorHash() => r'4e5af4f08112cd27134ed364b0fa2e769898e696';
 
 /// See also [uuidGenerator].
 @ProviderFor(uuidGenerator)
-final uuidGeneratorProvider = AutoDisposeProvider<Uuid>.internal(
+final uuidGeneratorProvider = Provider<Uuid>.internal(
   uuidGenerator,
   name: r'uuidGeneratorProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,6 +20,6 @@ final uuidGeneratorProvider = AutoDisposeProvider<Uuid>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef UuidGeneratorRef = AutoDisposeProviderRef<Uuid>;
+typedef UuidGeneratorRef = ProviderRef<Uuid>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

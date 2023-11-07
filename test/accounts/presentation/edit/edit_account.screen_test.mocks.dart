@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as _i2;
 import 'package:go_router/go_router.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:myxpenses/accounts/accounts.dart' as _i4;
-import 'package:myxpenses/core/core.dart' as _i5;
+import 'package:myxpenses/core/presentation/navigation/app_router.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -194,14 +194,4 @@ class MockAccountsRepository extends _i1.Mock
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
-
-  @override
-  _i6.Future<List<_i4.AccountModel>> loadAccounts() => (super.noSuchMethod(
-        Invocation.method(
-          #loadAccounts,
-          [],
-        ),
-        returnValue:
-            _i6.Future<List<_i4.AccountModel>>.value(<_i4.AccountModel>[]),
-      ) as _i6.Future<List<_i4.AccountModel>>);
 }

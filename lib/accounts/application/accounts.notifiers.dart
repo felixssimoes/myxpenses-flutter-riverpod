@@ -1,5 +1,4 @@
-import 'package:myxpenses/accounts/data/accounts.repository.dart';
-import 'package:myxpenses/accounts/domain/account.model.dart';
+import 'package:myxpenses/accounts/accounts.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'accounts.notifiers.g.dart';

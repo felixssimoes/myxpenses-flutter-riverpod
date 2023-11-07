@@ -1,15 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:myxpenses/accounts/accounts.dart';
+import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
+import 'package:uuid/uuid.dart';
 
 import '../robot.dart';
 
 void main() {
   testWidgets('delete account flow', (tester) async {
-    final r = Robot(tester);
-    final container = await r.pumpApp();
-    final repo = container.read(accountsRepositoryProvider);
+    final repo = MemoryAccountsRepository(uuidGenerator: const Uuid());
     await repo.createAccount(name: 'Account to Delete');
     await repo.createAccount(name: 'My Account');
+
+    final r = Robot(tester);
+    await r.pumpApp(accountsRepository: repo);
 
     await tester.pumpAndSettle();
 

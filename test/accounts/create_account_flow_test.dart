@@ -1,13 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
+import 'package:uuid/uuid.dart';
 
 import '../robot.dart';
 
 void main() {
   testWidgets('create account flow', (tester) async {
     const accountName = 'My Account';
+    final repo = MemoryAccountsRepository(uuidGenerator: const Uuid());
 
     final r = Robot(tester);
-    await r.pumpApp();
+    await r.pumpApp(accountsRepository: repo);
     await tester.pumpAndSettle();
 
     // 1. tap on add account button
