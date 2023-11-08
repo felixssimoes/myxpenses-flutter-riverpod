@@ -6,11 +6,11 @@ part of 'accounts.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$accountsHash() => r'329e9580934b8a733a5ddf67b92790a35311dac9';
+String _$accountsHash() => r'cbaf02466dfb534502b6fb547d6268a53d3134cf';
 
 /// See also [accounts].
 @ProviderFor(accounts)
-final accountsProvider = StreamProvider<List<AccountModel>>.internal(
+final accountsProvider = FutureProvider<List<AccountModel>>.internal(
   accounts,
   name: r'accountsProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final accountsProvider = StreamProvider<List<AccountModel>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef AccountsRef = StreamProviderRef<List<AccountModel>>;
+typedef AccountsRef = FutureProviderRef<List<AccountModel>>;
 String _$accountHash() => r'ec48e888f53e0eac41fc3a56b8a5ed6615c24f77';
 
 /// Copied from Dart SDK

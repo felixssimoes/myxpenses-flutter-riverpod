@@ -4,8 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'accounts.notifiers.g.dart';
 
 @Riverpod(keepAlive: true)
-Stream<List<AccountModel>> accounts(AccountsRef ref) =>
-    ref.watch(accountsRepositoryProvider).watchAccounts;
+Future<List<AccountModel>> accounts(AccountsRef ref) =>
+    ref.watch(accountsRepositoryProvider).loadAccounts();
 
 @Riverpod(keepAlive: true)
 Future<AccountModel?> account(AccountRef ref, String accountId) async {

@@ -19,7 +19,7 @@ void main() {
       final appRouter = MockAppRouter();
       final a1 = mockAccountModel();
       final a2 = mockAccountModel();
-      when(repository.watchAccounts).thenAnswer((_) => Stream.value([a1, a2]));
+      when(repository.loadAccounts()).thenAnswer((_) async => [a1, a2]);
 
       final r = AccountsListScreenRobot(tester);
       await r.pumpAccountsListScreen(
@@ -29,7 +29,7 @@ void main() {
 
       r.expectFindNAccounts(2);
       r.expectFindEmptyState(false);
-      verify(repository.watchAccounts);
+      verify(repository.loadAccounts());
       verifyZeroInteractions(appRouter);
 
       await r.tapAddAccountButton();
@@ -46,7 +46,7 @@ void main() {
     testWidgets('empty state', (tester) async {
       final repository = MockAccountsRepository();
       final appRouter = MockAppRouter();
-      when(repository.watchAccounts).thenAnswer((_) => Stream.value([]));
+      when(repository.loadAccounts()).thenAnswer((_) async => []);
 
       final r = AccountsListScreenRobot(tester);
       await r.pumpAccountsListScreen(
@@ -56,7 +56,7 @@ void main() {
 
       r.expectFindNAccounts(0);
       r.expectFindEmptyState(true);
-      verify(repository.watchAccounts);
+      verify(repository.loadAccounts());
       verifyNoMoreInteractions(repository);
       verifyZeroInteractions(appRouter);
     });

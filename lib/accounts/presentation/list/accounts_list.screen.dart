@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 
-import '../../application/accounts.notifiers.dart';
 import 'widgets/accounts_list_tile.dart';
 
 class AccountsListScreen extends ConsumerWidget {

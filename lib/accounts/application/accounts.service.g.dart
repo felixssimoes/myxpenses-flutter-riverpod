@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'accounts.data.dart';
+part of 'accounts.service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$accountsRepositoryHash() =>
-    r'467022e85cf670330c327e2ff7d8e18caf3c3db9';
+String _$accountsServiceHash() => r'1c0be274ef01b1fca8da6db0c2f5bd6b74471a95';
 
-/// See also [accountsRepository].
-@ProviderFor(accountsRepository)
-final accountsRepositoryProvider = Provider<AccountsRepository>.internal(
-  accountsRepository,
-  name: r'accountsRepositoryProvider',
+/// See also [accountsService].
+@ProviderFor(accountsService)
+final accountsServiceProvider = Provider<AccountsService>.internal(
+  accountsService,
+  name: r'accountsServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$accountsRepositoryHash,
+      : _$accountsServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef AccountsRepositoryRef = ProviderRef<AccountsRepository>;
+typedef AccountsServiceRef = ProviderRef<AccountsService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -17,7 +17,7 @@ class EditAccountController extends _$EditAccountController {
     state = await AsyncValue.guard(() async {
       final account = await ref.read(accountProvider(accountId).future);
       await ref
-          .read(accountsRepositoryProvider)
+          .read(accountsServiceProvider)
           .updateAccount(account: account!.copyWith(name: name));
       ref.read(appRouterProvider).goBack();
     });
@@ -29,9 +29,7 @@ class EditAccountController extends _$EditAccountController {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       final account = await ref.read(accountProvider(accountId).future);
-      await ref
-          .read(accountsRepositoryProvider)
-          .deleteAccount(account: account!);
+      await ref.read(accountsServiceProvider).deleteAccount(account: account!);
       ref.read(appRouterProvider).goHome();
     });
   }

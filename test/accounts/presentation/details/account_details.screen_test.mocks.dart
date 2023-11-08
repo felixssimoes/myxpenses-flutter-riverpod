@@ -8,8 +8,8 @@ import 'dart:async' as _i6;
 import 'package:flutter_riverpod/flutter_riverpod.dart' as _i2;
 import 'package:go_router/go_router.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:myxpenses/accounts/accounts.dart' as _i4;
-import 'package:myxpenses/core/presentation/navigation/app_router.dart' as _i5;
+import 'package:myxpenses/accounts/accounts.dart' as _i5;
+import 'package:myxpenses/core/presentation/navigation/app_router.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -43,20 +43,10 @@ class _FakeGoRouter_1 extends _i1.SmartFake implements _i3.GoRouter {
         );
 }
 
-class _FakeAccountModel_2 extends _i1.SmartFake implements _i4.AccountModel {
-  _FakeAccountModel_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i4.AppRouter {
   MockAppRouter() {
     _i1.throwOnMissingStub(this);
   }
@@ -129,67 +119,49 @@ class MockAppRouter extends _i1.Mock implements _i5.AppRouter {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAccountsRepository extends _i1.Mock
-    implements _i4.AccountsRepository {
+    implements _i5.AccountsRepository {
   MockAccountsRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i4.AccountModel> get accounts => (super.noSuchMethod(
-        Invocation.getter(#accounts),
-        returnValue: <_i4.AccountModel>[],
-      ) as List<_i4.AccountModel>);
+  _i6.Future<List<_i5.AccountModel>> loadAccounts() => (super.noSuchMethod(
+        Invocation.method(
+          #loadAccounts,
+          [],
+        ),
+        returnValue:
+            _i6.Future<List<_i5.AccountModel>>.value(<_i5.AccountModel>[]),
+      ) as _i6.Future<List<_i5.AccountModel>>);
 
   @override
-  _i6.Stream<List<_i4.AccountModel>> get watchAccounts => (super.noSuchMethod(
-        Invocation.getter(#watchAccounts),
-        returnValue: _i6.Stream<List<_i4.AccountModel>>.empty(),
-      ) as _i6.Stream<List<_i4.AccountModel>>);
-
-  @override
-  _i6.Future<_i4.AccountModel> createAccount({required String? name}) =>
+  _i6.Future<void> insertAccount(_i5.AccountModel? account) =>
       (super.noSuchMethod(
         Invocation.method(
-          #createAccount,
-          [],
-          {#name: name},
+          #insertAccount,
+          [account],
         ),
-        returnValue: _i6.Future<_i4.AccountModel>.value(_FakeAccountModel_2(
-          this,
-          Invocation.method(
-            #createAccount,
-            [],
-            {#name: name},
-          ),
-        )),
-      ) as _i6.Future<_i4.AccountModel>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i6.Future<_i4.AccountModel> updateAccount(
-          {required _i4.AccountModel? account}) =>
+  _i6.Future<void> updateAccount(_i5.AccountModel? account) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateAccount,
-          [],
-          {#account: account},
+          [account],
         ),
-        returnValue: _i6.Future<_i4.AccountModel>.value(_FakeAccountModel_2(
-          this,
-          Invocation.method(
-            #updateAccount,
-            [],
-            {#account: account},
-          ),
-        )),
-      ) as _i6.Future<_i4.AccountModel>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> deleteAccount({required _i4.AccountModel? account}) =>
+  _i6.Future<void> deleteAccount(_i5.AccountModel? account) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAccount,
-          [],
-          {#account: account},
+          [account],
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

@@ -12,7 +12,7 @@ class CreateAccountController extends _$CreateAccountController {
   Future<void> createAccount(String name) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref.read(accountsRepositoryProvider).createAccount(name: name);
+      await ref.read(accountsServiceProvider).createAccount(name: name);
       ref.read(appRouterProvider).goBack();
     });
   }

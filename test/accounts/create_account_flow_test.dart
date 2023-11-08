@@ -1,13 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
-import 'package:uuid/uuid.dart';
 
 import '../robot.dart';
 
 void main() {
   testWidgets('create account flow', (tester) async {
     const accountName = 'My Account';
-    final repo = MemoryAccountsRepository(uuidGenerator: const Uuid());
+    final repo = InMemoryAccountsRepository();
 
     final r = Robot(tester);
     await r.pumpApp(accountsRepository: repo);

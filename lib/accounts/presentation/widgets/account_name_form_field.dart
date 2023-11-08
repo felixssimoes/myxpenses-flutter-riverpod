@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:myxpenses/accounts/accounts.dart';
 
-class AccountNameFormField extends ConsumerWidget {
+class AccountNameFormField extends StatelessWidget {
   const AccountNameFormField({
     required this.controller,
     this.enabled = true,
@@ -15,7 +13,7 @@ class AccountNameFormField extends ConsumerWidget {
   final bool enabled;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return TextFormField(
       enabled: enabled,
       controller: controller,
@@ -25,12 +23,6 @@ class AccountNameFormField extends ConsumerWidget {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter an account name';
-        }
-        if (ref
-            .read(accountsRepositoryProvider)
-            .accounts
-            .any((a) => a.name == value && a.id != accountId)) {
-          return 'Account name already exists';
         }
         return null;
       },

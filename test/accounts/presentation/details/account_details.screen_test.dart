@@ -19,8 +19,8 @@ void main() {
       final appRouter = MockAppRouter();
       final accountsRepository = MockAccountsRepository();
       final account = mockAccountModel();
-      when(accountsRepository.watchAccounts)
-          .thenAnswer((_) => Stream.value([account]));
+      when(accountsRepository.loadAccounts())
+          .thenAnswer((_) async => [account]);
 
       final r = AccountDetailsScreenRobot(tester);
       await r.pumpAccountDetailsScreen(
