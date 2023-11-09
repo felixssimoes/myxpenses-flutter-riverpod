@@ -28,18 +28,19 @@ class AccountsListScreen extends ConsumerWidget {
         ],
       ),
       body: AsyncValueWidget(
-        value: ref.watch(accountsProvider),
-        data: (accounts) => accounts.isEmpty
+        value: ref.watch(accountsViewProvider),
+        data: (accountViews) => accountViews.isEmpty
             ? const Center(child: Text('no accounts created yet'))
             : ListView.builder(
-                itemCount: accounts.length,
+                itemCount: accountViews.length,
                 itemBuilder: (context, index) {
-                  final account = accounts[index];
+                  final accountView = accountViews[index];
                   return AccountListTile(
-                    account: account,
+                    account: accountView.account,
+                    total: accountView.total,
                     onTap: () => ref
                         .read(appRouterProvider)
-                        .openAccountDetails(account.id),
+                        .openAccountDetails(accountView.account.id),
                   );
                 },
               ),

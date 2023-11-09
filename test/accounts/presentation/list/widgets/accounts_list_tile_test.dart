@@ -14,6 +14,7 @@ void main() {
         home: Material(
           child: AccountListTile(
             account: account,
+            total: 123,
             onTap: () => tapCallback(),
           ),
         ),
@@ -23,6 +24,7 @@ void main() {
 
     final nameFinder = find.text(account.name);
     expect(nameFinder, findsOneWidget);
+    expect(find.text('123.00'), findsOneWidget);
     verifyZeroInteractions(tapCallback);
 
     await tester.tap(nameFinder);
