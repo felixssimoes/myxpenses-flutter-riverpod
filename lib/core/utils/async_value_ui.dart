@@ -7,7 +7,6 @@ extension AsyncValueUI on AsyncValue {
     if (!isLoading && hasError) {
       await showExceptionAlertDialog(
         context: context,
-        title: 'Error',
         exception: error,
       );
     }

@@ -48,7 +48,7 @@ class CreateAccountScreenRobot {
   }
 
   Finder expectFindAccountNameExistsError() {
-    final finder = find.text('Account name already exists');
+    final finder = find.text('An account with this name already exists.');
     expect(finder, findsOneWidget);
     return finder;
   }

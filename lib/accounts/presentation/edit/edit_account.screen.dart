@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/accounts/presentation/widgets/account_name_form_field.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/core/presentation/dialogs/alert_info.dart';
 
 import 'edit_account.controller.dart';
 
@@ -31,25 +32,19 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
 
   Future<void> _deleteAccountWithConfirmation() async {
     FocusScope.of(context).unfocus();
-    final theme = Theme.of(context);
-    await showDialog(
+    await showAlertDialog(
       context: context,
-      builder: (_) => AlertDialog.adaptive(
-        title: const Text('Delete Account'),
-        content: const Text('Are you sure you want to delete this account?'),
+      alertInfo: AlertInfo(
+        title: 'Delete Account',
+        text: 'Are you sure you want to delete this account?',
         actions: [
-          TextButton(
-            onPressed: () => ref.read(appRouterProvider).goBack(),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
+          AlertAction.cancel(),
+          AlertAction(
+            title: 'Delete',
+            isDestructive: true,
             onPressed: () => ref
                 .read(editAccountControllerProvider.notifier)
                 .deleteAccount(accountId: widget.accountId),
-            style: TextButton.styleFrom(
-              foregroundColor: theme.colorScheme.error,
-            ),
-            child: const Text('Delete'),
           ),
         ],
       ),

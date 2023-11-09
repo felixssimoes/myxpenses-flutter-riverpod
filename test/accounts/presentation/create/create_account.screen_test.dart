@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 
+import '../../../_helpers/mocks/mocks.dart';
 import 'create_account.screen.robot.dart';
 import 'create_account.screen_test.mocks.dart';
 
@@ -63,28 +64,27 @@ void main() {
       verifyZeroInteractions(appRouter);
     });
 
-    // TODO: fix this test after adding proper error handling
-    // testWidgets('existing account name', (tester) async {
-    //   await tester.runAsync(() async {
-    //     const accountName = 'My Account';
-    //     when(repository.loadAccounts())
-    //         .thenAnswer((_) async => [mockAccountModel(name: accountName)]);
+    testWidgets('existing account name', (tester) async {
+      await tester.runAsync(() async {
+        const accountName = 'My Account';
+        when(repository.loadAccounts())
+            .thenAnswer((_) async => [mockAccountModel(name: accountName)]);
 
-    //     final r = CreateAccountScreenRobot(tester);
-    //     await r.pumpAccountsListScreen(
-    //       repository: repository,
-    //       appRouter: appRouter,
-    //     );
+        final r = CreateAccountScreenRobot(tester);
+        await r.pumpAccountsListScreen(
+          repository: repository,
+          appRouter: appRouter,
+        );
 
-    //     r.expectFindAccountNameFormField();
-    //     r.expectFindCreateAccountButton();
+        r.expectFindAccountNameFormField();
+        r.expectFindCreateAccountButton();
 
-    //     await r.setAccountName(accountName);
-    //     await r.tapCreateAccount();
+        await r.setAccountName(accountName);
+        await r.tapCreateAccount();
 
-    //     r.expectFindAccountNameExistsError();
-    //     verifyZeroInteractions(appRouter);
-    //   });
-    // });
+        r.expectFindAccountNameExistsError();
+        verifyZeroInteractions(appRouter);
+      });
+    });
   });
 }

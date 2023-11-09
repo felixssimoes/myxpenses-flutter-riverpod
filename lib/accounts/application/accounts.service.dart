@@ -13,21 +13,40 @@ class AccountsService {
   final Ref _ref;
 
   Future<void> createAccount({required String name}) async {
+    await _validateAccountName(name: name);
     final account = AccountModel(
       id: _ref.read(uuidGeneratorProvider).v4(),
       name: name,
     );
-    _ref.read(accountsRepositoryProvider).insertAccount(account);
+    await _ref.read(accountsRepositoryProvider).insertAccount(account);
     _ref.invalidate(accountsProvider);
   }
 
   Future<void> updateAccount({required AccountModel account}) async {
-    _ref.read(accountsRepositoryProvider).updateAccount(account);
+    await _validateAccountName(
+      name: account.name,
+      accountId: account.id,
+    );
+    await _ref.read(accountsRepositoryProvider).updateAccount(account);
     _ref.invalidate(accountsProvider);
   }
 
   Future<void> deleteAccount({required AccountModel account}) async {
-    _ref.read(accountsRepositoryProvider).deleteAccount(account);
+    await _ref.read(accountsRepositoryProvider).deleteAccount(account);
     _ref.invalidate(accountsProvider);
+  }
+
+  Future<void> _validateAccountName({
+    required String name,
+    String? accountId,
+  }) async {
+    if (name.isEmpty) {
+      throw InvalidAccountNameException();
+    }
+
+    final accounts = await _ref.read(accountsProvider.future);
+    if (accounts.any((a) => a.name == name && a.id != accountId)) {
+      throw AccountNameAlreadyExistsException();
+    }
   }
 }

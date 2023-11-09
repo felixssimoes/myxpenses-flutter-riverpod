@@ -146,22 +146,21 @@ void main() {
         verifyZeroInteractions(appRouter);
       });
 
-      // TODO: fix this test after adding proper error handling
-      // testWidgets('should show account name exists error', (tester) async {
-      //   final r = EditAccountScreenRobot(tester);
-      //   await r.pumpEditAccountScreen(
-      //     accountId: account1.id,
-      //     appRouter: appRouter,
-      //     accountsRepository: accountsRepository,
-      //   );
+      testWidgets('should show account name exists error', (tester) async {
+        final r = EditAccountScreenRobot(tester);
+        await r.pumpEditAccountScreen(
+          accountId: account1.id,
+          appRouter: appRouter,
+          accountsRepository: accountsRepository,
+        );
 
-      //   await r.setAccountName(account2.name);
-      //   await r.tapUpdateAccountButton();
-      //   r.expectFindAccountNameExistsError();
+        await r.setAccountName(account2.name);
+        await r.tapUpdateAccountButton();
+        r.expectFindAccountNameExistsError();
 
-      //   verifyNever(accountsRepository.update(account1));
-      //   verifyZeroInteractions(appRouter);
-      // });
+        verifyNever(accountsRepository.updateAccount(account1));
+        verifyZeroInteractions(appRouter);
+      });
     });
   });
 }
