@@ -5,6 +5,9 @@ enum Routes {
   accountDetails('details/:account_id'),
   editAccount('edit/:account_id'),
 
+  // expenses
+  createExpense('create_expense'),
+
   dummy('');
 
   const Routes(

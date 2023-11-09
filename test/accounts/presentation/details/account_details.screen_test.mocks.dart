@@ -113,6 +113,15 @@ class MockAppRouter extends _i1.Mock implements _i4.AppRouter {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void openCreateExpense(String? accountId) => super.noSuchMethod(
+        Invocation.method(
+          #openCreateExpense,
+          [accountId],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [AccountsRepository].

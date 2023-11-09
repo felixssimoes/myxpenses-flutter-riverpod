@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../accounts/accounts.dart';
@@ -51,6 +52,13 @@ class AppRouter {
     );
   }
 
+  void openCreateExpense(String accountId) {
+    _router.pushNamed(
+      Routes.createExpense.name,
+      pathParameters: {'account_id': accountId},
+    );
+  }
+
   void _setupRoutes() {
     _router = GoRouter(
       debugLogDiagnostics: true,
@@ -79,6 +87,19 @@ class AppRouter {
               builder: (context, state) => AccountDetailsScreen(
                 accountId: state.pathParameters['account_id']!,
               ),
+              routes: [
+                GoRoute(
+                  path: Routes.createExpense.path,
+                  name: Routes.createExpense.name,
+                  pageBuilder: (context, state) => MaterialPage<void>(
+                    key: state.pageKey,
+                    fullscreenDialog: true,
+                    child: CreateExpenseScreen(
+                      accountId: state.pathParameters['account_id']!,
+                    ),
+                  ),
+                ),
+              ],
             ),
             GoRoute(
               path: Routes.editAccount.path,

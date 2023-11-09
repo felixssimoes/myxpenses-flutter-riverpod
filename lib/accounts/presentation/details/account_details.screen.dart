@@ -25,6 +25,11 @@ class AccountDetailsScreen extends ConsumerWidget {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () =>
+            ref.read(appRouterProvider).openCreateExpense(accountId),
+      ),
     );
   }
 }
