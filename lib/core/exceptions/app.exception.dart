@@ -30,3 +30,21 @@ class InvalidAccountNameException extends AppException {
           message: 'Please enter a valid account name.',
         );
 }
+
+/// Expenses
+
+class InvalidExpenseCategoryException extends AppException {
+  InvalidExpenseCategoryException()
+      : super._(
+          code: 'invalid_expense_category',
+          message: 'Please enter a valid expense category.',
+        );
+}
+
+class InvalidExpenseAmountException extends AppException {
+  InvalidExpenseAmountException()
+      : super._(
+          code: 'invalid_expense_amount',
+          message: 'Please enter a valid expense amount.',
+        );
+}
