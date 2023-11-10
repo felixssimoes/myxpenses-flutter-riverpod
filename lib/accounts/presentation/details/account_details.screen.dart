@@ -50,7 +50,7 @@ class AccountDetailsScreen extends ConsumerWidget {
                     final expense = expenses[index];
                     return ListTile(
                       title: Text(expense.category),
-                      subtitle: Text(expense.date.toString()),
+                      subtitle: Text(longDateFormatter.format(expense.date)),
                       trailing: Text(expense.amount.toString()),
                     );
                   },
