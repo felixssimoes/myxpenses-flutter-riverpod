@@ -10,6 +10,7 @@ class MyXpensesApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
     return MaterialApp.router(
       title: 'myXpenses',
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.teal),
       routerConfig: router.routerConfig,
     );
   }
