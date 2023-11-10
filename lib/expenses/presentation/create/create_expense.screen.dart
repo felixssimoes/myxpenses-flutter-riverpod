@@ -5,6 +5,10 @@ import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 import 'package:myxpenses/expenses/presentation/create/create_expense.controller.dart';
 
+import '../widgets/expense_amount.dart';
+import '../widgets/expense_category.dart';
+import '../widgets/expense_date.dart';
+
 class CreateExpenseScreen extends ConsumerStatefulWidget {
   const CreateExpenseScreen({
     required this.accountId,
@@ -19,7 +23,6 @@ class CreateExpenseScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateExpenseScreenState extends ConsumerState<CreateExpenseScreen> {
-  final _dateFormat = DateFormat('EEEE, MMMM d, yyyy');
   final _formKey = GlobalKey<FormState>();
   final _categoryController = TextEditingController();
   final _amountController = TextEditingController();
@@ -54,56 +57,11 @@ class _CreateExpenseScreenState extends ConsumerState<CreateExpenseScreen> {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: _categoryController,
-                    decoration: const InputDecoration(
-                      labelText: 'Category',
-                      icon: Icon(Icons.category),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a category';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _amountController,
-                    decoration: const InputDecoration(
-                        labelText: 'Amount', icon: Icon(Icons.attach_money)),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter an amount';
-                      }
-                      final parsedValue = double.tryParse(value);
-                      if (parsedValue == null || parsedValue <= 0) {
-                        return 'Please enter a valid amount';
-                      }
-                      return null;
-                    },
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Icon(Icons.calendar_today),
-                      Text(_dateFormat.format(_date)),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final date = await showDatePicker(
-                            context: context,
-                            initialDate: _date,
-                            firstDate: DateTime(0),
-                            lastDate: DateTime.now(),
-                          );
-                          if (date != null) {
-                            setState(() {
-                              _date = date;
-                            });
-                          }
-                        },
-                        child: const Text('...'),
-                      ),
-                    ],
+                  ExpenseCategoryFormField(controller: _categoryController),
+                  ExpenseAmountFormField(controller: _amountController),
+                  ExpenseDateFormField(
+                    startDate: _date,
+                    onDateChanged: (date) => setState(() => _date = date),
                   ),
                   ElevatedButton(
                     onPressed: state.isLoading
