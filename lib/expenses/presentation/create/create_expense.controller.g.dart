@@ -7,7 +7,7 @@ part of 'create_expense.controller.dart';
 // **************************************************************************
 
 String _$createExpenseControllerHash() =>
-    r'667078fe70a7507dac5f38a5d2bdd50ca3da774c';
+    r'50677be322d332f5c59c9b88fdb52f02f55e2b67';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 }
 
 abstract class _$CreateExpenseController
-    extends BuildlessAutoDisposeAsyncNotifier<CreateExpenseState> {
+    extends BuildlessAutoDisposeAsyncNotifier<void> {
   late final String accountId;
 
-  Future<CreateExpenseState> build({
+  Future<void> build({
     required String accountId,
   });
 }
@@ -44,8 +44,7 @@ abstract class _$CreateExpenseController
 const createExpenseControllerProvider = CreateExpenseControllerFamily();
 
 /// See also [CreateExpenseController].
-class CreateExpenseControllerFamily
-    extends Family<AsyncValue<CreateExpenseState>> {
+class CreateExpenseControllerFamily extends Family<AsyncValue<void>> {
   /// See also [CreateExpenseController].
   const CreateExpenseControllerFamily();
 
@@ -85,7 +84,7 @@ class CreateExpenseControllerFamily
 /// See also [CreateExpenseController].
 class CreateExpenseControllerProvider
     extends AutoDisposeAsyncNotifierProviderImpl<CreateExpenseController,
-        CreateExpenseState> {
+        void> {
   /// See also [CreateExpenseController].
   CreateExpenseControllerProvider({
     required String accountId,
@@ -116,7 +115,7 @@ class CreateExpenseControllerProvider
   final String accountId;
 
   @override
-  Future<CreateExpenseState> runNotifierBuild(
+  Future<void> runNotifierBuild(
     covariant CreateExpenseController notifier,
   ) {
     return notifier.build(
@@ -141,8 +140,8 @@ class CreateExpenseControllerProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<CreateExpenseController,
-      CreateExpenseState> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<CreateExpenseController, void>
+      createElement() {
     return _CreateExpenseControllerProviderElement(this);
   }
 
@@ -161,15 +160,14 @@ class CreateExpenseControllerProvider
   }
 }
 
-mixin CreateExpenseControllerRef
-    on AutoDisposeAsyncNotifierProviderRef<CreateExpenseState> {
+mixin CreateExpenseControllerRef on AutoDisposeAsyncNotifierProviderRef<void> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
 class _CreateExpenseControllerProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<CreateExpenseController,
-        CreateExpenseState> with CreateExpenseControllerRef {
+        void> with CreateExpenseControllerRef {
   _CreateExpenseControllerProviderElement(super.provider);
 
   @override
