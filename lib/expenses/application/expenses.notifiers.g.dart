@@ -187,7 +187,7 @@ class _ExpensesProviderElement extends FutureProviderElement<List<ExpenseModel>>
   DateTime get endDate => (origin as ExpensesProvider).endDate;
 }
 
-String _$allExpensesHash() => r'6788bb477bf7157c4166fe3b4665341fd4657ba0';
+String _$allExpensesHash() => r'4a36e33ffe26b077ad34c827b358e12aa6d4d778';
 
 /// See also [allExpenses].
 @ProviderFor(allExpenses)

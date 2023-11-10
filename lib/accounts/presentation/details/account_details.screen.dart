@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 
 class AccountDetailsScreen extends ConsumerWidget {
@@ -28,6 +29,7 @@ class AccountDetailsScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
+          const DateIntervalSelector(),
           if (accountView.valueOrNull != null)
             Container(
               width: double.infinity,

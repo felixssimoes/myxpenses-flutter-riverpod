@@ -1,3 +1,4 @@
+import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,14 +17,15 @@ Future<List<ExpenseModel>> expenses(
           endDate: endDate,
         );
 
-// TODO: remove this when we have period selection done
 @Riverpod(keepAlive: true)
 Future<List<ExpenseModel>> allExpenses(
   AllExpensesRef ref, {
   required String accountId,
-}) =>
-    ref.watch(expensesProvider(
-      accountId: accountId,
-      startDate: DateTime(0),
-      endDate: DateTime.now(),
-    ).future);
+}) {
+  final interval = ref.watch(dateIntervalProvider);
+  return ref.watch(expensesProvider(
+    accountId: accountId,
+    startDate: interval.startDate,
+    endDate: interval.endDate,
+  ).future);
+}
