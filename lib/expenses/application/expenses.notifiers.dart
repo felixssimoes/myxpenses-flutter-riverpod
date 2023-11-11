@@ -20,3 +20,11 @@ Future<List<ExpenseModel>> expenses(
         endDate: interval.endDate,
       );
 }
+
+@Riverpod(keepAlive: true)
+Future<ExpenseModel?> expense(
+  ExpenseRef ref, {
+  required String expenseId,
+}) async {
+  return ref.watch(expensesRepositoryProvider).loadExpense(id: expenseId);
+}

@@ -64,7 +64,7 @@ class JsonExpensesRepository implements ExpensesRepository {
     if (index == -1) {
       throw Exception('Expense not found');
     }
-    final exps = _expenses.items;
+    final exps = List<ExpenseModel>.from(_expenses.items);
     exps[index] = expense;
     await _update(exps);
   }

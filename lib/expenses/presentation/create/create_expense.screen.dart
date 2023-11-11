@@ -52,42 +52,45 @@ class _CreateExpenseScreenState extends ConsumerState<CreateExpenseScreen> {
                     Text('Account: ${accountValue.valueOrNull?.name ?? '???'}'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  ExpenseCategoryFormField(controller: _categoryController),
-                  ExpenseAmountFormField(controller: _amountController),
-                  ExpenseDateFormField(
-                    startDate: _date,
-                    onDateChanged: (date) => setState(() => _date = date),
-                  ),
-                  ElevatedButton(
-                    onPressed: state.isLoading
-                        ? null
-                        : () {
-                            FocusScope.of(context).unfocus();
-                            if (_formKey.currentState!.validate()) {
-                              ref
-                                  .read(createExpenseControllerProvider(
-                                    accountId: widget.accountId,
-                                  ).notifier)
-                                  .createExpense(
-                                    widget.accountId,
-                                    _categoryController.text,
-                                    _amountController.text,
-                                    _date,
-                                  );
-                            }
-                          },
-                    child: const Text('Create Expense'),
-                  ),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  children: [
+                    ExpenseCategoryFormField(controller: _categoryController),
+                    ExpenseAmountFormField(controller: _amountController),
+                    ExpenseDateFormField(
+                      startDate: _date,
+                      onDateChanged: (date) => setState(() => _date = date),
+                    ),
+                    const Spacer(),
+                    ElevatedButton(
+                      onPressed: state.isLoading ? null : _createExpense,
+                      child: const Text('Create Expense'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _createExpense() async {
+    FocusScope.of(context).unfocus();
+    if (_formKey.currentState!.validate()) {
+      await ref
+          .read(createExpenseControllerProvider(
+            accountId: widget.accountId,
+          ).notifier)
+          .createExpense(
+            widget.accountId,
+            _categoryController.text,
+            _amountController.text,
+            _date,
+          );
+    }
   }
 }

@@ -3,13 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i7;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart' as _i2;
 import 'package:go_router/go_router.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:myxpenses/accounts/accounts.dart' as _i5;
+import 'package:myxpenses/accounts/accounts.dart' as _i6;
 import 'package:myxpenses/core/presentation/navigation/app_router.dart' as _i4;
+import 'package:myxpenses/expenses/expenses.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -122,57 +123,66 @@ class MockAppRouter extends _i1.Mock implements _i4.AppRouter {
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  void openEditExpense(_i5.ExpenseModel? expense) => super.noSuchMethod(
+        Invocation.method(
+          #openEditExpense,
+          [expense],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [AccountsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAccountsRepository extends _i1.Mock
-    implements _i5.AccountsRepository {
+    implements _i6.AccountsRepository {
   MockAccountsRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<List<_i5.AccountModel>> loadAccounts() => (super.noSuchMethod(
+  _i7.Future<List<_i6.AccountModel>> loadAccounts() => (super.noSuchMethod(
         Invocation.method(
           #loadAccounts,
           [],
         ),
         returnValue:
-            _i6.Future<List<_i5.AccountModel>>.value(<_i5.AccountModel>[]),
-      ) as _i6.Future<List<_i5.AccountModel>>);
+            _i7.Future<List<_i6.AccountModel>>.value(<_i6.AccountModel>[]),
+      ) as _i7.Future<List<_i6.AccountModel>>);
 
   @override
-  _i6.Future<void> insertAccount(_i5.AccountModel? account) =>
+  _i7.Future<void> insertAccount(_i6.AccountModel? account) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertAccount,
           [account],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i6.Future<void> updateAccount(_i5.AccountModel? account) =>
+  _i7.Future<void> updateAccount(_i6.AccountModel? account) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateAccount,
           [account],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i6.Future<void> deleteAccount(_i5.AccountModel? account) =>
+  _i7.Future<void> deleteAccount(_i6.AccountModel? account) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteAccount,
           [account],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }

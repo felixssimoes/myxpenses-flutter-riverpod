@@ -73,7 +73,7 @@ class AlertInfo extends Equatable {
   }) : actions = actions ?? [AlertAction.ok()];
 
   factory AlertInfo.fromException(
-    Exception exception, {
+    dynamic exception, {
     String? title,
   }) {
     if (exception is AppException) {

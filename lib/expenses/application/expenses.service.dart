@@ -35,11 +35,13 @@ class ExpensesService {
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).updateExpense(expense);
     _ref.invalidate(expensesProvider);
+    _ref.invalidate(expenseProvider(expenseId: expense.id));
   }
 
   Future<void> deleteExpense(ExpenseModel expense) async {
     await _ref.read(expensesRepositoryProvider).deleteExpense(expense);
     _ref.invalidate(expensesProvider);
+    _ref.invalidate(expenseProvider(expenseId: expense.id));
   }
 
   Future<void> _validateExpense(ExpenseModel expense) async {

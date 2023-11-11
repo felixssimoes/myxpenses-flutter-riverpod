@@ -153,5 +153,132 @@ class _ExpensesProviderElement extends FutureProviderElement<List<ExpenseModel>>
   @override
   String get accountId => (origin as ExpensesProvider).accountId;
 }
+
+String _$expenseHash() => r'ae9072124b25266097c7a4c78029b121e520ff94';
+
+/// See also [expense].
+@ProviderFor(expense)
+const expenseProvider = ExpenseFamily();
+
+/// See also [expense].
+class ExpenseFamily extends Family<AsyncValue<ExpenseModel?>> {
+  /// See also [expense].
+  const ExpenseFamily();
+
+  /// See also [expense].
+  ExpenseProvider call({
+    required String expenseId,
+  }) {
+    return ExpenseProvider(
+      expenseId: expenseId,
+    );
+  }
+
+  @override
+  ExpenseProvider getProviderOverride(
+    covariant ExpenseProvider provider,
+  ) {
+    return call(
+      expenseId: provider.expenseId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'expenseProvider';
+}
+
+/// See also [expense].
+class ExpenseProvider extends FutureProvider<ExpenseModel?> {
+  /// See also [expense].
+  ExpenseProvider({
+    required String expenseId,
+  }) : this._internal(
+          (ref) => expense(
+            ref as ExpenseRef,
+            expenseId: expenseId,
+          ),
+          from: expenseProvider,
+          name: r'expenseProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$expenseHash,
+          dependencies: ExpenseFamily._dependencies,
+          allTransitiveDependencies: ExpenseFamily._allTransitiveDependencies,
+          expenseId: expenseId,
+        );
+
+  ExpenseProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.expenseId,
+  }) : super.internal();
+
+  final String expenseId;
+
+  @override
+  Override overrideWith(
+    FutureOr<ExpenseModel?> Function(ExpenseRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ExpenseProvider._internal(
+        (ref) => create(ref as ExpenseRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        expenseId: expenseId,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<ExpenseModel?> createElement() {
+    return _ExpenseProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ExpenseProvider && other.expenseId == expenseId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, expenseId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ExpenseRef on FutureProviderRef<ExpenseModel?> {
+  /// The parameter `expenseId` of this provider.
+  String get expenseId;
+}
+
+class _ExpenseProviderElement extends FutureProviderElement<ExpenseModel?>
+    with ExpenseRef {
+  _ExpenseProviderElement(super.provider);
+
+  @override
+  String get expenseId => (origin as ExpenseProvider).expenseId;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

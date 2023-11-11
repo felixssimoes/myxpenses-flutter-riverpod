@@ -27,6 +27,12 @@ class _ExpenseDateFormFieldState extends State<ExpenseDateFormField> {
   }
 
   @override
+  void didUpdateWidget(covariant ExpenseDateFormField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _date = widget.startDate;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

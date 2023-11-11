@@ -59,6 +59,16 @@ class AppRouter {
     );
   }
 
+  void openEditExpense(ExpenseModel expense) {
+    _router.pushNamed(
+      Routes.editExpense.name,
+      pathParameters: {
+        'account_id': expense.accountId,
+        'expense_id': expense.id,
+      },
+    );
+  }
+
   void _setupRoutes() {
     _router = GoRouter(
       debugLogDiagnostics: true,
@@ -97,6 +107,13 @@ class AppRouter {
                     child: CreateExpenseScreen(
                       accountId: state.pathParameters['account_id']!,
                     ),
+                  ),
+                ),
+                GoRoute(
+                  path: Routes.editExpense.path,
+                  name: Routes.editExpense.name,
+                  builder: (context, state) => EditExpenseScreen(
+                    expenseId: state.pathParameters['expense_id']!,
                   ),
                 ),
               ],

@@ -51,7 +51,15 @@ class AccountDetailsScreen extends ConsumerWidget {
                     return ListTile(
                       title: Text(expense.category),
                       subtitle: Text(longDateFormatter.format(expense.date)),
-                      trailing: Text(expense.amount.toString()),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(expense.amount.toString()),
+                          const Icon(Icons.chevron_right),
+                        ],
+                      ),
+                      onTap: () =>
+                          ref.read(appRouterProvider).openEditExpense(expense),
                     );
                   },
                 );

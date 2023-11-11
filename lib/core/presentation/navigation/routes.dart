@@ -7,6 +7,7 @@ enum Routes {
 
   // expenses
   createExpense('create_expense'),
+  editExpense('create_expense/:expense_id'),
 
   dummy('');
 
