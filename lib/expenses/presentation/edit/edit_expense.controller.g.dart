@@ -7,7 +7,7 @@ part of 'edit_expense.controller.dart';
 // **************************************************************************
 
 String _$editExpenseControllerHash() =>
-    r'e34705871be3dab65633a1227f1773d569cea734';
+    r'954ce56f85a6fabb2a20e848526813cdc0faccb7';
 
 /// See also [EditExpenseController].
 @ProviderFor(EditExpenseController)

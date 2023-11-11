@@ -41,7 +41,15 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
       (_, state) => state.showAlertDialogOnError(context),
     );
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Expense')),
+      appBar: AppBar(
+        title: const Text('Edit Expense'),
+        actions: [
+          IconButton(
+            onPressed: _deleteExpenseWithConfirmation,
+            icon: const Icon(Icons.delete),
+          ),
+        ],
+      ),
       body: AsyncValueWidget(
         value: ref.watch(expenseProvider(expenseId: widget.expenseId)),
         data: (expense) => Form(
@@ -106,5 +114,26 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
           amount: double.tryParse(_amountController.text) ?? 0,
           date: _date,
         );
+  }
+
+  Future<void> _deleteExpenseWithConfirmation() async {
+    FocusScope.of(context).unfocus();
+    await showAlertDialog(
+      context: context,
+      alertInfo: AlertInfo(
+        title: 'Delete Expense',
+        text: 'Are you sure you want to delete this expense?',
+        actions: [
+          AlertAction.cancel(),
+          AlertAction(
+            title: 'Delete',
+            isDestructive: true,
+            onPressed: () => ref
+                .read(editExpenseControllerProvider.notifier)
+                .deleteExpense(expenseId: widget.expenseId),
+          ),
+        ],
+      ),
+    );
   }
 }
