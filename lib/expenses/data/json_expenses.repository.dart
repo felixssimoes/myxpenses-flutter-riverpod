@@ -26,12 +26,31 @@ class JsonExpensesRepository implements ExpensesRepository {
     }
 
     _expenses = _ExpensesModel.fromJson(json.decode(data));
+    final adjustedStartDate =
+        startDate.subtract(const Duration(microseconds: 1));
     return _expenses.items
         .where((e) =>
             e.accountId == accountId &&
-            e.date.isAfter(startDate) &&
+            e.date.isAfter(adjustedStartDate) &&
             e.date.isBefore(endDate))
         .toList();
+  }
+
+  @override
+  Future<ExpenseModel?> loadExpense({required String id}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('expenses');
+    if (data == null) {
+      _expenses = const _ExpensesModel(items: []);
+      return null;
+    }
+
+    _expenses = _ExpensesModel.fromJson(json.decode(data));
+    try {
+      return _expenses.items.firstWhere((e) => e.id == id);
+    } catch (_) {
+      return null;
+    }
   }
 
   @override

@@ -8,24 +8,15 @@ part 'expenses.notifiers.g.dart';
 Future<List<ExpenseModel>> expenses(
   ExpensesRef ref, {
   required String accountId,
-  required DateTime startDate,
-  required DateTime endDate,
-}) =>
-    ref.watch(expensesRepositoryProvider).loadExpenses(
-          accountId: accountId,
-          startDate: startDate,
-          endDate: endDate,
-        );
-
-@Riverpod(keepAlive: true)
-Future<List<ExpenseModel>> allExpenses(
-  AllExpensesRef ref, {
-  required String accountId,
-}) {
+}) async {
   final interval = ref.watch(dateIntervalProvider);
-  return ref.watch(expensesProvider(
-    accountId: accountId,
-    startDate: interval.startDate,
-    endDate: interval.endDate,
-  ).future);
+  if (interval == null) {
+    return [];
+  }
+
+  return ref.watch(expensesRepositoryProvider).loadExpenses(
+        accountId: accountId,
+        startDate: interval.startDate,
+        endDate: interval.endDate,
+      );
 }

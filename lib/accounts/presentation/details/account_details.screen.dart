@@ -41,7 +41,7 @@ class AccountDetailsScreen extends ConsumerWidget {
             ),
           Expanded(
             child: AsyncValueWidget(
-              value: ref.watch(allExpensesProvider(accountId: accountId)),
+              value: ref.watch(expensesProvider(accountId: accountId)),
               data: (expenses) {
                 expenses.sort((a, b) => b.date.compareTo(a.date));
                 return ListView.builder(

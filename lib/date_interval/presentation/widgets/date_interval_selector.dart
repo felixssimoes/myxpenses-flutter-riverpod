@@ -19,7 +19,7 @@ class DateIntervalSelector extends ConsumerWidget {
         children: [
           SegmentedButton<DateIntervalType>(
             showSelectedIcon: false,
-            selected: {interval.type},
+            selected: {interval != null ? interval.type : DateIntervalType.day},
             segments: const [
               ButtonSegment(
                 value: DateIntervalType.day,
@@ -47,7 +47,7 @@ class DateIntervalSelector extends ConsumerWidget {
                     .read(dateIntervalServiceProvider)
                     .selectPreviousInterval(),
               ),
-              Text(_buildDateIntervalText(interval)),
+              if (interval != null) Text(_buildDateIntervalText(interval)),
               IconButton(
                 icon: const Icon(Icons.arrow_right),
                 onPressed: () =>

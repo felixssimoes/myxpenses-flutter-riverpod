@@ -6,6 +6,7 @@ abstract class ExpensesRepository {
     required DateTime startDate,
     required DateTime endDate,
   });
+  Future<ExpenseModel?> loadExpense({required String id});
   Future<void> insertExpense(ExpenseModel expense);
   Future<void> updateExpense(ExpenseModel expense);
   Future<void> deleteExpense(ExpenseModel expense);

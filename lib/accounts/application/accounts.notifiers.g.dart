@@ -168,7 +168,7 @@ class _AccountProviderElement extends FutureProviderElement<AccountModel?>
   String get accountId => (origin as AccountProvider).accountId;
 }
 
-String _$accountsViewHash() => r'c9ba970eb29cf00d6f38c7f43508ece6f85e5b2b';
+String _$accountsViewHash() => r'8bd4e980e9e985b06754c62cdd4c4ef3a2fd5120';
 
 /// See also [accountsView].
 @ProviderFor(accountsView)

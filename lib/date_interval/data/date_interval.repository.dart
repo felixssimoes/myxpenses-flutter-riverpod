@@ -15,13 +15,9 @@ DateIntervalRepository dateIntervalRepository(DateIntervalRepositoryRef ref) =>
     DateIntervalRepository();
 
 class DateIntervalRepository {
-  var _dateInterval = (
-    type: DateIntervalType.day,
-    startDate: DateTime.now(),
-    endDate: DateTime.now(),
-  );
+  DateInterval? _dateInterval;
 
-  DateInterval get dateInterval => _dateInterval;
+  DateInterval? get dateInterval => _dateInterval;
 
   void setDateInterval(DateInterval dateInterval) {
     _dateInterval = dateInterval;

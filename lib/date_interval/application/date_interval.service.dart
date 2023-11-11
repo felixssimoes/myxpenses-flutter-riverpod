@@ -9,18 +9,22 @@ DateIntervalService dateIntervalService(DateIntervalServiceRef ref) =>
     DateIntervalService(ref);
 
 class DateIntervalService {
-  DateIntervalService(this._ref);
+  DateIntervalService(this._ref) {
+    _resetDatesForType(DateIntervalType.day);
+  }
 
   final Ref _ref;
 
   void setType(DateIntervalType newType) {
     _resetDatesForType(newType);
-    _ref.invalidate(dateIntervalProvider);
   }
 
   void selectPreviousInterval() {
-    var (:type, :startDate, :endDate) =
-        _ref.read(dateIntervalRepositoryProvider).dateInterval;
+    final interval = _ref.read(dateIntervalRepositoryProvider).dateInterval;
+    if (interval == null) {
+      return;
+    }
+    var (:type, :startDate, :endDate) = interval;
     switch (type) {
       case DateIntervalType.day:
         endDate = startDate;
@@ -44,9 +48,11 @@ class DateIntervalService {
   }
 
   void selectNextInterval() {
-    var (:type, :startDate, :endDate) =
-        _ref.read(dateIntervalRepositoryProvider).dateInterval;
-
+    final interval = _ref.read(dateIntervalRepositoryProvider).dateInterval;
+    if (interval == null) {
+      return;
+    }
+    var (:type, :startDate, :endDate) = interval;
     switch (type) {
       case DateIntervalType.day:
         startDate = startDate.add(const Duration(days: 1));
@@ -99,5 +105,6 @@ class DateIntervalService {
       startDate: startDate,
       endDate: endDate,
     ));
+    _ref.invalidate(dateIntervalProvider);
   }
 }

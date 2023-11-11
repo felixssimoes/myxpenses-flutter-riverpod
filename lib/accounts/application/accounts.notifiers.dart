@@ -26,7 +26,7 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
   final accountsView = <AccountView>[];
   for (final account in accounts) {
     final expenses =
-        await ref.watch(allExpensesProvider(accountId: account.id).future);
+        await ref.watch(expensesProvider(accountId: account.id).future);
     final total = expenses
         .where((expense) => expense.accountId == account.id)
         .fold<double>(
