@@ -74,6 +74,12 @@ class JsonExpensesRepository implements ExpensesRepository {
     await _update(_expenses.items.where((e) => e.id != expense.id).toList());
   }
 
+  @override
+  Future<void> deleteAllExpensesForAccount(String accountId) async {
+    await _update(
+        _expenses.items.where((e) => e.accountId != accountId).toList());
+  }
+
   Future<void> _update(List<ExpenseModel> expenses) async {
     _expenses = _expenses.copyWith(items: expenses);
     final prefs = await SharedPreferences.getInstance();

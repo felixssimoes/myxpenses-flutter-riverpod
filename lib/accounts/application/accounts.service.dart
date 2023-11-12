@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'accounts.service.g.dart';
@@ -33,7 +34,12 @@ class AccountsService {
 
   Future<void> deleteAccount({required AccountModel account}) async {
     await _ref.read(accountsRepositoryProvider).deleteAccount(account);
+    await _ref
+        .read(expensesRepositoryProvider)
+        .deleteAllExpensesForAccount(account.id);
     _ref.invalidate(accountsProvider);
+    _ref.invalidate(expensesProvider);
+    _ref.invalidate(expenseProvider);
   }
 
   Future<void> _validateAccountName({

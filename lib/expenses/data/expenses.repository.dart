@@ -10,4 +10,5 @@ abstract class ExpensesRepository {
   Future<void> insertExpense(ExpenseModel expense);
   Future<void> updateExpense(ExpenseModel expense);
   Future<void> deleteExpense(ExpenseModel expense);
+  Future<void> deleteAllExpensesForAccount(String accountId);
 }
