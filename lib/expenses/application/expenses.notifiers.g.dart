@@ -6,7 +6,7 @@ part of 'expenses.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$expensesHash() => r'84907d839c822ff2ae36d90d1971a70fb1ad363f';
+String _$expensesHash() => r'da227338923293bb49c435aeb56159f2b3af1f98';
 
 /// Copied from Dart SDK
 class _SystemHash {

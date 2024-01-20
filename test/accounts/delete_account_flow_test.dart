@@ -1,17 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
+import 'package:myxpenses/expenses/data/memory_expenses.repository.dart';
 
 import '../_helpers/mocks.dart';
 import '../robot.dart';
 
 void main() {
   testWidgets('delete account flow', (tester) async {
-    final repo = InMemoryAccountsRepository();
-    await repo.insertAccount(mockAccountModel(name: 'Account to Delete'));
-    await repo.insertAccount(mockAccountModel(name: 'My Account'));
+    final accountsRepo = InMemoryAccountsRepository();
+    final expensesRepo = InMemoryExpensesRepository();
+    await accountsRepo
+        .insertAccount(mockAccountModel(name: 'Account to Delete'));
+    await accountsRepo.insertAccount(mockAccountModel(name: 'My Account'));
 
     final r = Robot(tester);
-    await r.pumpApp(accountsRepository: repo);
+    await r.pumpApp(
+      accountsRepository: accountsRepo,
+      expensesRepository: expensesRepo,
+    );
 
     await tester.pumpAndSettle();
 

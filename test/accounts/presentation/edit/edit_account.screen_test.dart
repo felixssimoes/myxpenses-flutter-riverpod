@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/expenses/data/expenses.repository.dart';
 
 import '../../../_helpers/mocks.dart';
 import 'edit_account.screen.robot.dart';
@@ -12,18 +13,26 @@ import 'edit_account.screen_test.mocks.dart';
 @GenerateMocks([
   AppRouter,
   AccountsRepository,
+  ExpensesRepository,
 ])
 void main() {
   group('EditAccountScreen', () {
     final appRouter = MockAppRouter();
     final accountsRepository = MockAccountsRepository();
+    final expensesRepository = MockExpensesRepository();
 
     setUp(() {
       reset(appRouter);
       reset(accountsRepository);
+      reset(expensesRepository);
+
       when(appRouter.goBack()).thenAnswer((_) async => true);
       when(accountsRepository.updateAccount(any))
           .thenAnswer((invocation) async => invocation.positionalArguments[0]);
+      when(accountsRepository.deleteAccount(any))
+          .thenAnswer((_) => Future.value());
+      when(expensesRepository.deleteAllExpensesForAccount(any))
+          .thenAnswer((_) => Future.value());
     });
 
     testWidgets('Initialization and basic functionality', (tester) async {
@@ -58,6 +67,7 @@ void main() {
           accountId: account.id,
           appRouter: appRouter,
           accountsRepository: accountsRepository,
+          expensesRepository: expensesRepository,
         );
 
         await r.tapDeleteAccountButton();
@@ -65,6 +75,7 @@ void main() {
 
         await r.tapConfirmAccountDeleteAlertDeleteButton();
         verify(accountsRepository.deleteAccount(account));
+        verify(expensesRepository.deleteAllExpensesForAccount(account.id));
         verify(appRouter.goHome());
       });
 

@@ -1,15 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
+import 'package:myxpenses/expenses/data/memory_expenses.repository.dart';
 
 import '../robot.dart';
 
 void main() {
   testWidgets('create account flow', (tester) async {
     const accountName = 'My Account';
-    final repo = InMemoryAccountsRepository();
+    final accountsRepo = InMemoryAccountsRepository();
+    final expensesRepo = InMemoryExpensesRepository();
 
     final r = Robot(tester);
-    await r.pumpApp(accountsRepository: repo);
+    await r.pumpApp(
+      accountsRepository: accountsRepo,
+      expensesRepository: expensesRepo,
+    );
     await tester.pumpAndSettle();
 
     // 1. tap on add account button

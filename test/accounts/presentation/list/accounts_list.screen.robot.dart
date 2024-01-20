@@ -1,4 +1,3 @@
-// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +13,7 @@ class AccountsListScreenRobot {
     required AccountsRepository repository,
     required AppRouter appRouter,
   }) async {
+    tester.view.physicalSize = const Size(600, 900);
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:myxpenses/accounts/accounts.dart' as _i6;
 import 'package:myxpenses/core/presentation/navigation/app_router.dart' as _i4;
+import 'package:myxpenses/expenses/data/expenses.repository.dart' as _i8;
 import 'package:myxpenses/expenses/expenses.dart' as _i5;
 
 // ignore_for_file: type=lint
@@ -183,6 +184,91 @@ class MockAccountsRepository extends _i1.Mock
         Invocation.method(
           #deleteAccount,
           [account],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+}
+
+/// A class which mocks [ExpensesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockExpensesRepository extends _i1.Mock
+    implements _i8.ExpensesRepository {
+  MockExpensesRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.Future<List<_i5.ExpenseModel>> loadExpenses({
+    required String? accountId,
+    required DateTime? startDate,
+    required DateTime? endDate,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadExpenses,
+          [],
+          {
+            #accountId: accountId,
+            #startDate: startDate,
+            #endDate: endDate,
+          },
+        ),
+        returnValue:
+            _i7.Future<List<_i5.ExpenseModel>>.value(<_i5.ExpenseModel>[]),
+      ) as _i7.Future<List<_i5.ExpenseModel>>);
+
+  @override
+  _i7.Future<_i5.ExpenseModel?> loadExpense({required String? id}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadExpense,
+          [],
+          {#id: id},
+        ),
+        returnValue: _i7.Future<_i5.ExpenseModel?>.value(),
+      ) as _i7.Future<_i5.ExpenseModel?>);
+
+  @override
+  _i7.Future<void> insertExpense(_i5.ExpenseModel? expense) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #insertExpense,
+          [expense],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> updateExpense(_i5.ExpenseModel? expense) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateExpense,
+          [expense],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> deleteExpense(_i5.ExpenseModel? expense) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteExpense,
+          [expense],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> deleteAllExpensesForAccount(String? accountId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllExpensesForAccount,
+          [accountId],
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),

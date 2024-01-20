@@ -1,10 +1,11 @@
-// ignore_for_file: scoped_providers_should_specify_dependencies
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/accounts/presentation/widgets/account_name_form_field.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/expenses/data/expenses.repository.dart';
+import 'package:myxpenses/expenses/expenses.dart';
 
 class EditAccountScreenRobot {
   EditAccountScreenRobot(this.tester);
@@ -15,6 +16,7 @@ class EditAccountScreenRobot {
     required String accountId,
     required AppRouter appRouter,
     required AccountsRepository accountsRepository,
+    ExpensesRepository? expensesRepository,
   }) async {
     await tester.binding.setSurfaceSize(const Size(400 * 3, 1800 * 3));
     await tester.pumpWidget(
@@ -22,6 +24,8 @@ class EditAccountScreenRobot {
         overrides: [
           accountsRepositoryProvider.overrideWithValue(accountsRepository),
           appRouterProvider.overrideWithValue(appRouter),
+          if (expensesRepository != null)
+            expensesRepositoryProvider.overrideWithValue(expensesRepository),
         ],
         child: MaterialApp(
           home: EditAccountScreen(accountId: accountId),
