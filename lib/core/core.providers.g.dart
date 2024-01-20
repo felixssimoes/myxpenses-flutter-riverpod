@@ -25,7 +25,7 @@ String _$initializationHash() => r'6c0e2cd342ee8708faeb8435fd1cc145abf70925';
 
 /// See also [initialization].
 @ProviderFor(initialization)
-final initializationProvider = AutoDisposeProvider<dynamic>.internal(
+final initializationProvider = AutoDisposeProvider<Object?>.internal(
   initialization,
   name: r'initializationProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -35,6 +35,6 @@ final initializationProvider = AutoDisposeProvider<dynamic>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef InitializationRef = AutoDisposeProviderRef<dynamic>;
+typedef InitializationRef = AutoDisposeProviderRef<Object?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

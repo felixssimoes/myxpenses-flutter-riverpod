@@ -34,7 +34,7 @@ abstract class _$CreateExpenseController
     extends BuildlessAutoDisposeAsyncNotifier<void> {
   late final String accountId;
 
-  Future<void> build({
+  FutureOr<void> build({
     required String accountId,
   });
 }
@@ -115,7 +115,7 @@ class CreateExpenseControllerProvider
   final String accountId;
 
   @override
-  Future<void> runNotifierBuild(
+  FutureOr<void> runNotifierBuild(
     covariant CreateExpenseController notifier,
   ) {
     return notifier.build(

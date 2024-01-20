@@ -117,7 +117,7 @@ class _$_AccountsModelImpl implements __AccountsModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountsModelImpl &&

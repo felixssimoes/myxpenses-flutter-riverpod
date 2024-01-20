@@ -172,8 +172,7 @@ String _$accountsViewHash() => r'8bd4e980e9e985b06754c62cdd4c4ef3a2fd5120';
 
 /// See also [accountsView].
 @ProviderFor(accountsView)
-final accountsViewProvider =
-    FutureProvider<List<({AccountModel account, double total})>>.internal(
+final accountsViewProvider = FutureProvider<List<AccountView>>.internal(
   accountsView,
   name: r'accountsViewProvider',
   debugGetCreateSourceHash:
@@ -182,8 +181,7 @@ final accountsViewProvider =
   allTransitiveDependencies: null,
 );
 
-typedef AccountsViewRef
-    = FutureProviderRef<List<({AccountModel account, double total})>>;
+typedef AccountsViewRef = FutureProviderRef<List<AccountView>>;
 String _$accountViewHash() => r'0bed3473680a81d55b7306c2961490b8dbe68750';
 
 /// See also [accountView].
@@ -191,8 +189,7 @@ String _$accountViewHash() => r'0bed3473680a81d55b7306c2961490b8dbe68750';
 const accountViewProvider = AccountViewFamily();
 
 /// See also [accountView].
-class AccountViewFamily
-    extends Family<AsyncValue<({AccountModel account, double total})?>> {
+class AccountViewFamily extends Family<AsyncValue<AccountView?>> {
   /// See also [accountView].
   const AccountViewFamily();
 
@@ -230,8 +227,7 @@ class AccountViewFamily
 }
 
 /// See also [accountView].
-class AccountViewProvider
-    extends FutureProvider<({AccountModel account, double total})?> {
+class AccountViewProvider extends FutureProvider<AccountView?> {
   /// See also [accountView].
   AccountViewProvider(
     String accountId,
@@ -266,9 +262,7 @@ class AccountViewProvider
 
   @override
   Override overrideWith(
-    FutureOr<({AccountModel account, double total})?> Function(
-            AccountViewRef provider)
-        create,
+    FutureOr<AccountView?> Function(AccountViewRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -285,8 +279,7 @@ class AccountViewProvider
   }
 
   @override
-  FutureProviderElement<({AccountModel account, double total})?>
-      createElement() {
+  FutureProviderElement<AccountView?> createElement() {
     return _AccountViewProviderElement(this);
   }
 
@@ -304,14 +297,12 @@ class AccountViewProvider
   }
 }
 
-mixin AccountViewRef
-    on FutureProviderRef<({AccountModel account, double total})?> {
+mixin AccountViewRef on FutureProviderRef<AccountView?> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
-class _AccountViewProviderElement
-    extends FutureProviderElement<({AccountModel account, double total})?>
+class _AccountViewProviderElement extends FutureProviderElement<AccountView?>
     with AccountViewRef {
   _AccountViewProviderElement(super.provider);
 
