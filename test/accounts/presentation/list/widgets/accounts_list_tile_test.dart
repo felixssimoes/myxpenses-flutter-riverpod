@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:myxpenses/accounts/presentation/list/widgets/accounts_list_tile.dart';
 
-import '../../../../_helpers/mocks/mocks.dart';
+import '../../../../_helpers/mocks.dart';
 
 void main() {
   testWidgets('AccountListTile shows account info', (tester) async {

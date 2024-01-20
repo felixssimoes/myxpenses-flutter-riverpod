@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 
-import '../../../_helpers/mocks/mocks.dart';
+import '../../../_helpers/mocks.dart';
 import 'create_account.screen.robot.dart';
 import 'create_account.screen_test.mocks.dart';
 

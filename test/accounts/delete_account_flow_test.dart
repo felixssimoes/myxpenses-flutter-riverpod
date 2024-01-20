@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
 
-import '../_helpers/mocks/mocks.dart';
+import '../_helpers/mocks.dart';
 import '../robot.dart';
 
 void main() {

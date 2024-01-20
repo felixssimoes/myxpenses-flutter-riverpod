@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/accounts.dart';
+import 'package:myxpenses/accounts/presentation/details/widgets/account_expense_tile.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/date_interval/date_interval.dart';
+import 'package:myxpenses/expenses/data/expenses.repository.dart';
+import 'package:myxpenses/expenses/expenses.dart';
 
 class AccountDetailsScreenRobot {
   AccountDetailsScreenRobot(this.tester);
@@ -13,11 +17,17 @@ class AccountDetailsScreenRobot {
     required String accountId,
     required AppRouter appRouter,
     required AccountsRepository accountsRepository,
+    ExpensesRepository? expensesRepository,
+    DateInterval? dateInterval,
   }) async {
     await tester.pumpWidget(ProviderScope(
       overrides: [
         appRouterProvider.overrideWithValue(appRouter),
         accountsRepositoryProvider.overrideWithValue(accountsRepository),
+        if (expensesRepository != null)
+          expensesRepositoryProvider.overrideWithValue(expensesRepository),
+        if (dateInterval != null)
+          dateIntervalProvider.overrideWithValue(dateInterval),
       ],
       child: MaterialApp(
         home: AccountDetailsScreen(accountId: accountId),
@@ -37,8 +47,25 @@ class AccountDetailsScreenRobot {
     return finder;
   }
 
+  Finder expectFindAddExpenseButton() {
+    final finder = find.byIcon(Icons.add);
+    expect(finder, findsOneWidget);
+    return finder;
+  }
+
+  void expectFindNExpenses(int n) {
+    final finder = find.byType(AccountExpenseTile);
+    expect(finder, findsNWidgets(n));
+  }
+
   Future<void> tapEditAccount() async {
     final finder = expectFindEditAccountButton();
+    await tester.tap(finder);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapAddExpense() async {
+    final finder = expectFindAddExpenseButton();
     await tester.tap(finder);
     await tester.pumpAndSettle();
   }
