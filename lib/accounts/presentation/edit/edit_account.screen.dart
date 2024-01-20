@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/accounts/presentation/widgets/account_name_form_field.dart';
 import 'package:myxpenses/core/core.dart';
-import 'package:myxpenses/core/presentation/dialogs/alert_info.dart';
 
 import 'edit_account.controller.dart';
 
