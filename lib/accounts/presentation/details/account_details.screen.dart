@@ -5,6 +5,8 @@ import 'package:myxpenses/core/core.dart';
 import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 
+import 'widgets/account_expense_tile.dart';
+
 class AccountDetailsScreen extends ConsumerWidget {
   const AccountDetailsScreen({
     required this.accountId,
@@ -48,19 +50,7 @@ class AccountDetailsScreen extends ConsumerWidget {
                   itemCount: expenses.length,
                   itemBuilder: (context, index) {
                     final expense = expenses[index];
-                    return ListTile(
-                      title: Text(expense.category),
-                      subtitle: Text(longDateFormatter.format(expense.date)),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(expense.amount.toString()),
-                          const Icon(Icons.chevron_right),
-                        ],
-                      ),
-                      onTap: () =>
-                          ref.read(appRouterProvider).openEditExpense(expense),
-                    );
+                    return AccountExpenseTile(expense: expense);
                   },
                 );
               },
