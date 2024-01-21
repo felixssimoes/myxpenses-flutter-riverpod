@@ -66,15 +66,15 @@ class DBExpensesRepository implements ExpensesRepository {
 
   @override
   Future<void> updateExpense(ExpenseModel expense) async {
-    await _db.update(_db.expensesTable).replace(
-          ExpensesTableCompanion(
-            id: Value(expense.id),
-            accountId: Value(expense.accountId),
-            category: Value(expense.category),
-            date: Value(expense.date),
-            amount: Value(expense.amount),
-          ),
-        );
+    await (_db.update(_db.expensesTable)
+          ..where((tbl) => tbl.id.isValue(expense.id)))
+        .write(ExpensesTableCompanion(
+      id: Value(expense.id),
+      accountId: Value(expense.accountId),
+      category: Value(expense.category),
+      date: Value(expense.date),
+      amount: Value(expense.amount),
+    ));
   }
 
   @override

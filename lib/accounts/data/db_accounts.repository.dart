@@ -31,12 +31,12 @@ class DBAccountsRepository extends AccountsRepository {
 
   @override
   Future<void> updateAccount(AccountModel account) async {
-    await _db.update(_db.accountsTable).replace(
-          AccountsTableCompanion(
-            id: Value(account.id),
-            name: Value(account.name),
-          ),
-        );
+    await (_db.update(_db.accountsTable)
+          ..where((tbl) => tbl.id.isValue(account.id)))
+        .write(AccountsTableCompanion(
+      id: Value(account.id),
+      name: Value(account.name),
+    ));
   }
 
   @override
