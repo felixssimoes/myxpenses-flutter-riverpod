@@ -7,9 +7,13 @@ abstract class ExpensesRepository {
     required DateTime endDate,
   });
 
-  /// Load a single expense by id. The reason this is because there could be
-  /// potentially a large number of expenses that could be loaded. If we were to
-  /// load all expenses, we would have to load all expenses for all accounts.
+  /// Load a single expense by id.
+  /// The reason for having a method to load a single record this in expenses
+  /// and not in accounts is because there could be potentially
+  /// a large number of expenses stored.
+  /// Otherwise we'd have to load all expenses for an account and then
+  /// filter them by id. As said before, this could be thousands of records
+  /// to be filtered and only use a couple of them.
   Future<ExpenseModel?> loadExpense({required String id});
 
   Future<void> insertExpense(ExpenseModel expense);
