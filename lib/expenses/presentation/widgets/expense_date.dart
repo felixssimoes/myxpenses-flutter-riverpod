@@ -4,6 +4,8 @@ import 'package:myxpenses/core/core.dart';
 typedef DateChangedCallback = void Function(DateTime date);
 
 class ExpenseDateFormField extends StatefulWidget {
+  static const setDateButtonKey = Key('ExpenseDateFormField_setDateButton');
+
   const ExpenseDateFormField({
     required this.startDate,
     required this.onDateChanged,
@@ -52,6 +54,7 @@ class _ExpenseDateFormFieldState extends State<ExpenseDateFormField> {
               widget.onDateChanged(_date);
             }
           },
+          key: ExpenseDateFormField.setDateButtonKey,
           child: const Text('...'),
         ),
       ],
