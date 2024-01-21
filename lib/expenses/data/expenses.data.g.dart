@@ -7,7 +7,7 @@ part of 'expenses.data.dart';
 // **************************************************************************
 
 String _$expensesRepositoryHash() =>
-    r'd1a053912e7640f1f90979a701e36c0f663127b9';
+    r'5c27447fa99ecf2f6e5fd226d1a3e80059041184';
 
 /// See also [expensesRepository].
 @ProviderFor(expensesRepository)
