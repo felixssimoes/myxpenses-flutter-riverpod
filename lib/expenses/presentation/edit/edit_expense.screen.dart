@@ -10,6 +10,8 @@ import '../widgets/expense_date.dart';
 import 'edit_expense.controller.dart';
 
 class EditExpenseScreen extends ConsumerStatefulWidget {
+  static const kSaveButtonKey = Key('saveButton');
+
   const EditExpenseScreen({
     required this.expenseId,
     super.key,
@@ -82,6 +84,7 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                       const Spacer(),
                       ElevatedButton(
                         onPressed: _updateExpense,
+                        key: EditExpenseScreen.kSaveButtonKey,
                         child: const Text('Save'),
                       ),
                     ],
