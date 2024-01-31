@@ -69,4 +69,11 @@ class AccountDetailsScreenRobot {
     await tester.tap(finder);
     await tester.pumpAndSettle();
   }
+
+  Future<void> tapExpenseTile(int index) async {
+    final finder = find.byType(AccountExpenseTile).at(index);
+    expect(finder, findsOneWidget);
+    await tester.tap(finder);
+    await tester.pumpAndSettle();
+  }
 }

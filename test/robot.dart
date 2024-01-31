@@ -6,12 +6,16 @@ import 'package:myxpenses/expenses/data/expenses.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 
 import 'accounts/accounts_robot.dart';
+import 'expenses/expenses_robot.dart';
 
 class Robot {
-  Robot(this.tester) : accounts = AccountsRobot(tester);
+  Robot(this.tester)
+      : accounts = AccountsRobot(tester),
+        expenses = ExpensesRobot(tester);
 
   final WidgetTester tester;
   final AccountsRobot accounts;
+  final ExpensesRobot expenses;
 
   Future<ProviderContainer> pumpApp({
     AccountsRepository? accountsRepository,
