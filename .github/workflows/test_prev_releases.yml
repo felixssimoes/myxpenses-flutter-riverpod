@@ -10,15 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        flutter-version: ${{ fromJson(steps.set-matrix.outputs.versions) }}
+        flutter-version: ['3.16.x','3.13.x']
     steps:
     - uses: actions/checkout@v2
 
-    - id: set-matrix
-      run: |
-        # Your script to fetch the latest Flutter versions and output them as a JSON array
-        echo "::set-output name=versions::$(curl -s https://flutter.dev/docs/development/tools/sdk/releases | grep -oP '(?<=<a href="/docs/development/tools/sdk/releases/)\d+\.\d+\.\d+(?=">)')"
-    
     - name: Install Flutter
       uses: subosito/flutter-action@v2
       with:
