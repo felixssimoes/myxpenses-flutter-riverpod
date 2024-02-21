@@ -7,19 +7,18 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     strategy:
       matrix:
         flutter-version: ['3.16.x','3.13.x']
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Install Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: ${{ matrix.flutter-version }}
-        channel: 'stable'
-        cache: true
-    
-    - name: Run Flutter tests
-      run: flutter test
+      - uses: actions/checkout@v4
+  
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          channel: 'stable'
+      
+      - name: Run Flutter tests
+        run: flutter test
