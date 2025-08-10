@@ -6,8 +6,8 @@ part of 'expense.model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExpenseModelImpl _$$ExpenseModelImplFromJson(Map<String, dynamic> json) =>
-    _$ExpenseModelImpl(
+_ExpenseModel _$ExpenseModelFromJson(Map<String, dynamic> json) =>
+    _ExpenseModel(
       id: json['id'] as String,
       accountId: json['accountId'] as String,
       category: json['category'] as String,
@@ -15,7 +15,7 @@ _$ExpenseModelImpl _$$ExpenseModelImplFromJson(Map<String, dynamic> json) =>
       amount: (json['amount'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$ExpenseModelImplToJson(_$ExpenseModelImpl instance) =>
+Map<String, dynamic> _$ExpenseModelToJson(_ExpenseModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'accountId': instance.accountId,

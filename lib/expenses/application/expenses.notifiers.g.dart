@@ -6,7 +6,7 @@ part of 'expenses.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$expensesHash() => r'da227338923293bb49c435aeb56159f2b3af1f98';
+String _$expensesHash() => r'57493092f38a8ee2c86f24cb21590dca04169c4e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -141,6 +141,8 @@ class ExpensesProvider extends FutureProvider<List<ExpenseModel>> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ExpensesRef on FutureProviderRef<List<ExpenseModel>> {
   /// The parameter `accountId` of this provider.
   String get accountId;
@@ -154,7 +156,7 @@ class _ExpensesProviderElement extends FutureProviderElement<List<ExpenseModel>>
   String get accountId => (origin as ExpensesProvider).accountId;
 }
 
-String _$expenseHash() => r'ae9072124b25266097c7a4c78029b121e520ff94';
+String _$expenseHash() => r'a96bd80e8ff51d0ee4a3ef9cc71af227ae35b210';
 
 /// See also [expense].
 @ProviderFor(expense)
@@ -268,6 +270,8 @@ class ExpenseProvider extends FutureProvider<ExpenseModel?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ExpenseRef on FutureProviderRef<ExpenseModel?> {
   /// The parameter `expenseId` of this provider.
   String get expenseId;
@@ -281,4 +285,4 @@ class _ExpenseProviderElement extends FutureProviderElement<ExpenseModel?>
   String get expenseId => (origin as ExpenseProvider).expenseId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

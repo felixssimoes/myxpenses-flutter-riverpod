@@ -1,3 +1,4 @@
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'date_interval.repository.g.dart';
@@ -11,7 +12,7 @@ typedef DateInterval = ({
 });
 
 @Riverpod(keepAlive: true)
-DateIntervalRepository dateIntervalRepository(DateIntervalRepositoryRef ref) =>
+DateIntervalRepository dateIntervalRepository(Ref ref) =>
     DateIntervalRepository();
 
 class DateIntervalRepository {

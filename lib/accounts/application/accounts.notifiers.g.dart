@@ -6,7 +6,7 @@ part of 'accounts.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$accountsHash() => r'cbaf02466dfb534502b6fb547d6268a53d3134cf';
+String _$accountsHash() => r'6f7a623656c3bcc94d101094cd6c8a94de100078';
 
 /// See also [accounts].
 @ProviderFor(accounts)
@@ -19,8 +19,10 @@ final accountsProvider = FutureProvider<List<AccountModel>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AccountsRef = FutureProviderRef<List<AccountModel>>;
-String _$accountHash() => r'ec48e888f53e0eac41fc3a56b8a5ed6615c24f77';
+String _$accountHash() => r'45632baa4a38b0d6d9efb0db6ad786dc88ad6536';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -155,6 +157,8 @@ class AccountProvider extends FutureProvider<AccountModel?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin AccountRef on FutureProviderRef<AccountModel?> {
   /// The parameter `accountId` of this provider.
   String get accountId;
@@ -168,7 +172,7 @@ class _AccountProviderElement extends FutureProviderElement<AccountModel?>
   String get accountId => (origin as AccountProvider).accountId;
 }
 
-String _$accountsViewHash() => r'8bd4e980e9e985b06754c62cdd4c4ef3a2fd5120';
+String _$accountsViewHash() => r'48034beaf7d616ac78157490a94f8cb621a0cda2';
 
 /// See also [accountsView].
 @ProviderFor(accountsView)
@@ -181,8 +185,10 @@ final accountsViewProvider = FutureProvider<List<AccountView>>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AccountsViewRef = FutureProviderRef<List<AccountView>>;
-String _$accountViewHash() => r'0bed3473680a81d55b7306c2961490b8dbe68750';
+String _$accountViewHash() => r'27e23e359ead9e057aa99c4fedb60805cba00bcc';
 
 /// See also [accountView].
 @ProviderFor(accountView)
@@ -297,6 +303,8 @@ class AccountViewProvider extends FutureProvider<AccountView?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin AccountViewRef on FutureProviderRef<AccountView?> {
   /// The parameter `accountId` of this provider.
   String get accountId;
@@ -310,4 +318,4 @@ class _AccountViewProviderElement extends FutureProviderElement<AccountView?>
   String get accountId => (origin as AccountViewProvider).accountId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,15 +1,16 @@
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/expenses/expenses.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'accounts.notifiers.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<List<AccountModel>> accounts(AccountsRef ref) =>
+Future<List<AccountModel>> accounts(Ref ref) =>
     ref.watch(accountsRepositoryProvider).loadAccounts();
 
 @Riverpod(keepAlive: true)
-Future<AccountModel?> account(AccountRef ref, String accountId) async {
+Future<AccountModel?> account(Ref ref, String accountId) async {
   final accounts = await ref.watch(accountsProvider.future);
   try {
     return (accounts).firstWhere((account) => account.id == accountId);
@@ -21,7 +22,7 @@ Future<AccountModel?> account(AccountRef ref, String accountId) async {
 typedef AccountView = ({AccountModel account, double total});
 
 @Riverpod(keepAlive: true)
-Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
+Future<List<AccountView>> accountsView(Ref ref) async {
   final accounts = await ref.watch(accountsProvider.future);
   final accountsView = <AccountView>[];
   for (final account in accounts) {
@@ -37,7 +38,7 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
 }
 
 @Riverpod(keepAlive: true)
-Future<AccountView?> accountView(AccountViewRef ref, String accountId) async {
+Future<AccountView?> accountView(Ref ref, String accountId) async {
   final accounts = await ref.watch(accountsViewProvider.future);
   try {
     return (accounts).firstWhere((av) => av.account.id == accountId);

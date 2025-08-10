@@ -7,7 +7,7 @@ part of 'accounts.data.dart';
 // **************************************************************************
 
 String _$accountsRepositoryHash() =>
-    r'6b273e9f07f49d3379e4bc79e3c1705d14aa7b18';
+    r'c3f32952954a4ead4f4bf42bb1e9f6e18fec84f6';
 
 /// See also [accountsRepository].
 @ProviderFor(accountsRepository)
@@ -21,6 +21,8 @@ final accountsRepositoryProvider = Provider<AccountsRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AccountsRepositoryRef = ProviderRef<AccountsRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

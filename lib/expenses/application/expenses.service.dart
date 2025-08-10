@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'expenses.service.g.dart';
 
 @Riverpod(keepAlive: true)
-ExpensesService expensesService(ExpensesServiceRef ref) => ExpensesService(ref);
+ExpensesService expensesService(Ref ref) => ExpensesService(ref);
 
 class ExpensesService {
   ExpensesService(this._ref);

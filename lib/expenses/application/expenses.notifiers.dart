@@ -1,12 +1,13 @@
 import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/expenses.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'expenses.notifiers.g.dart';
 
 @Riverpod(keepAlive: true)
 Future<List<ExpenseModel>> expenses(
-  ExpensesRef ref, {
+  Ref ref, {
   required String accountId,
 }) async {
   final interval = ref.watch(dateIntervalProvider);
@@ -23,7 +24,7 @@ Future<List<ExpenseModel>> expenses(
 
 @Riverpod(keepAlive: true)
 Future<ExpenseModel?> expense(
-  ExpenseRef ref, {
+  Ref ref, {
   required String expenseId,
 }) async {
   return ref.watch(expensesRepositoryProvider).loadExpense(id: expenseId);

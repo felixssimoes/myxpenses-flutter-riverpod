@@ -4,7 +4,7 @@ part 'account.model.freezed.dart';
 part 'account.model.g.dart';
 
 @freezed
-class AccountModel with _$AccountModel {
+abstract class AccountModel with _$AccountModel {
   const factory AccountModel({
     required String id,
     required String name,

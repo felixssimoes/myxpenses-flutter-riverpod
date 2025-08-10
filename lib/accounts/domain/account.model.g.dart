@@ -6,13 +6,13 @@ part of 'account.model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AccountModelImpl _$$AccountModelImplFromJson(Map<String, dynamic> json) =>
-    _$AccountModelImpl(
+_AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
+    _AccountModel(
       id: json['id'] as String,
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$AccountModelImplToJson(_$AccountModelImpl instance) =>
+Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

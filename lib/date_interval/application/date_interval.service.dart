@@ -5,8 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'date_interval.service.g.dart';
 
 @Riverpod(keepAlive: true)
-DateIntervalService dateIntervalService(DateIntervalServiceRef ref) =>
-    DateIntervalService(ref);
+DateIntervalService dateIntervalService(Ref ref) => DateIntervalService(ref);
 
 class DateIntervalService {
   DateIntervalService(this._ref) {

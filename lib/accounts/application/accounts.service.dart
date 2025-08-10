@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'accounts.service.g.dart';
 
 @Riverpod(keepAlive: true)
-AccountsService accountsService(AccountsServiceRef ref) => AccountsService(ref);
+AccountsService accountsService(Ref ref) => AccountsService(ref);
 
 class AccountsService {
   AccountsService(this._ref);

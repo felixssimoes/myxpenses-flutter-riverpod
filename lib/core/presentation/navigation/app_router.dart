@@ -10,11 +10,10 @@ import 'routes.dart';
 part 'app_router.g.dart';
 
 @Riverpod(keepAlive: true)
-GlobalKey<NavigatorState> navigatorKey(NavigatorKeyRef _) =>
-    GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> navigatorKey(Ref _) => GlobalKey<NavigatorState>();
 
 @riverpod
-AppRouter appRouter(AppRouterRef ref) => AppRouter(ref);
+AppRouter appRouter(Ref ref) => AppRouter(ref);
 
 class AppRouter {
   AppRouter(this.ref) {

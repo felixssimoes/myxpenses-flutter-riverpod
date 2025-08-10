@@ -109,6 +109,13 @@ class AccountsTableData extends DataClass
         id: id ?? this.id,
         name: name ?? this.name,
       );
+  AccountsTableData copyWithCompanion(AccountsTableCompanion data) {
+    return AccountsTableData(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('AccountsTableData(')
@@ -364,6 +371,16 @@ class ExpensesTableData extends DataClass
         date: date ?? this.date,
         amount: amount ?? this.amount,
       );
+  ExpensesTableData copyWithCompanion(ExpensesTableCompanion data) {
+    return ExpensesTableData(
+      id: data.id.present ? data.id.value : this.id,
+      accountId: data.accountId.present ? data.accountId.value : this.accountId,
+      category: data.category.present ? data.category.value : this.category,
+      date: data.date.present ? data.date.value : this.date,
+      amount: data.amount.present ? data.amount.value : this.amount,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('ExpensesTableData(')
@@ -491,6 +508,7 @@ class ExpensesTableCompanion extends UpdateCompanion<ExpensesTableData> {
 
 abstract class _$MyXpensesDatabase extends GeneratedDatabase {
   _$MyXpensesDatabase(QueryExecutor e) : super(e);
+  $MyXpensesDatabaseManager get managers => $MyXpensesDatabaseManager(this);
   late final $AccountsTableTable accountsTable = $AccountsTableTable(this);
   late final $ExpensesTableTable expensesTable = $ExpensesTableTable(this);
   @override
@@ -501,11 +519,328 @@ abstract class _$MyXpensesDatabase extends GeneratedDatabase {
       [accountsTable, expensesTable];
 }
 
+typedef $$AccountsTableTableCreateCompanionBuilder = AccountsTableCompanion
+    Function({
+  required String id,
+  required String name,
+  Value<int> rowid,
+});
+typedef $$AccountsTableTableUpdateCompanionBuilder = AccountsTableCompanion
+    Function({
+  Value<String> id,
+  Value<String> name,
+  Value<int> rowid,
+});
+
+class $$AccountsTableTableFilterComposer
+    extends Composer<_$MyXpensesDatabase, $AccountsTableTable> {
+  $$AccountsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+}
+
+class $$AccountsTableTableOrderingComposer
+    extends Composer<_$MyXpensesDatabase, $AccountsTableTable> {
+  $$AccountsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+}
+
+class $$AccountsTableTableAnnotationComposer
+    extends Composer<_$MyXpensesDatabase, $AccountsTableTable> {
+  $$AccountsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+}
+
+class $$AccountsTableTableTableManager extends RootTableManager<
+    _$MyXpensesDatabase,
+    $AccountsTableTable,
+    AccountsTableData,
+    $$AccountsTableTableFilterComposer,
+    $$AccountsTableTableOrderingComposer,
+    $$AccountsTableTableAnnotationComposer,
+    $$AccountsTableTableCreateCompanionBuilder,
+    $$AccountsTableTableUpdateCompanionBuilder,
+    (
+      AccountsTableData,
+      BaseReferences<_$MyXpensesDatabase, $AccountsTableTable,
+          AccountsTableData>
+    ),
+    AccountsTableData,
+    PrefetchHooks Function()> {
+  $$AccountsTableTableTableManager(
+      _$MyXpensesDatabase db, $AccountsTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AccountsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AccountsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AccountsTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              AccountsTableCompanion(
+            id: id,
+            name: name,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String name,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              AccountsTableCompanion.insert(
+            id: id,
+            name: name,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$AccountsTableTableProcessedTableManager = ProcessedTableManager<
+    _$MyXpensesDatabase,
+    $AccountsTableTable,
+    AccountsTableData,
+    $$AccountsTableTableFilterComposer,
+    $$AccountsTableTableOrderingComposer,
+    $$AccountsTableTableAnnotationComposer,
+    $$AccountsTableTableCreateCompanionBuilder,
+    $$AccountsTableTableUpdateCompanionBuilder,
+    (
+      AccountsTableData,
+      BaseReferences<_$MyXpensesDatabase, $AccountsTableTable,
+          AccountsTableData>
+    ),
+    AccountsTableData,
+    PrefetchHooks Function()>;
+typedef $$ExpensesTableTableCreateCompanionBuilder = ExpensesTableCompanion
+    Function({
+  required String id,
+  required String accountId,
+  required String category,
+  required DateTime date,
+  required double amount,
+  Value<int> rowid,
+});
+typedef $$ExpensesTableTableUpdateCompanionBuilder = ExpensesTableCompanion
+    Function({
+  Value<String> id,
+  Value<String> accountId,
+  Value<String> category,
+  Value<DateTime> date,
+  Value<double> amount,
+  Value<int> rowid,
+});
+
+class $$ExpensesTableTableFilterComposer
+    extends Composer<_$MyXpensesDatabase, $ExpensesTableTable> {
+  $$ExpensesTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get accountId => $composableBuilder(
+      column: $table.accountId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get amount => $composableBuilder(
+      column: $table.amount, builder: (column) => ColumnFilters(column));
+}
+
+class $$ExpensesTableTableOrderingComposer
+    extends Composer<_$MyXpensesDatabase, $ExpensesTableTable> {
+  $$ExpensesTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get accountId => $composableBuilder(
+      column: $table.accountId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+      column: $table.date, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get amount => $composableBuilder(
+      column: $table.amount, builder: (column) => ColumnOrderings(column));
+}
+
+class $$ExpensesTableTableAnnotationComposer
+    extends Composer<_$MyXpensesDatabase, $ExpensesTableTable> {
+  $$ExpensesTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get accountId =>
+      $composableBuilder(column: $table.accountId, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<double> get amount =>
+      $composableBuilder(column: $table.amount, builder: (column) => column);
+}
+
+class $$ExpensesTableTableTableManager extends RootTableManager<
+    _$MyXpensesDatabase,
+    $ExpensesTableTable,
+    ExpensesTableData,
+    $$ExpensesTableTableFilterComposer,
+    $$ExpensesTableTableOrderingComposer,
+    $$ExpensesTableTableAnnotationComposer,
+    $$ExpensesTableTableCreateCompanionBuilder,
+    $$ExpensesTableTableUpdateCompanionBuilder,
+    (
+      ExpensesTableData,
+      BaseReferences<_$MyXpensesDatabase, $ExpensesTableTable,
+          ExpensesTableData>
+    ),
+    ExpensesTableData,
+    PrefetchHooks Function()> {
+  $$ExpensesTableTableTableManager(
+      _$MyXpensesDatabase db, $ExpensesTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ExpensesTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ExpensesTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ExpensesTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> accountId = const Value.absent(),
+            Value<String> category = const Value.absent(),
+            Value<DateTime> date = const Value.absent(),
+            Value<double> amount = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ExpensesTableCompanion(
+            id: id,
+            accountId: accountId,
+            category: category,
+            date: date,
+            amount: amount,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String accountId,
+            required String category,
+            required DateTime date,
+            required double amount,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ExpensesTableCompanion.insert(
+            id: id,
+            accountId: accountId,
+            category: category,
+            date: date,
+            amount: amount,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$ExpensesTableTableProcessedTableManager = ProcessedTableManager<
+    _$MyXpensesDatabase,
+    $ExpensesTableTable,
+    ExpensesTableData,
+    $$ExpensesTableTableFilterComposer,
+    $$ExpensesTableTableOrderingComposer,
+    $$ExpensesTableTableAnnotationComposer,
+    $$ExpensesTableTableCreateCompanionBuilder,
+    $$ExpensesTableTableUpdateCompanionBuilder,
+    (
+      ExpensesTableData,
+      BaseReferences<_$MyXpensesDatabase, $ExpensesTableTable,
+          ExpensesTableData>
+    ),
+    ExpensesTableData,
+    PrefetchHooks Function()>;
+
+class $MyXpensesDatabaseManager {
+  final _$MyXpensesDatabase _db;
+  $MyXpensesDatabaseManager(this._db);
+  $$AccountsTableTableTableManager get accountsTable =>
+      $$AccountsTableTableTableManager(_db, _db.accountsTable);
+  $$ExpensesTableTableTableManager get expensesTable =>
+      $$ExpensesTableTableTableManager(_db, _db.expensesTable);
+}
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$databaseHash() => r'43792124b059cef84da74fe9a219731d4187710c';
+String _$databaseHash() => r'16a91d13b6c908a344a71553dc6cf7c65f47676e';
 
 /// See also [database].
 @ProviderFor(database)
@@ -518,6 +853,8 @@ final databaseProvider = Provider<MyXpensesDatabase>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef DatabaseRef = ProviderRef<MyXpensesDatabase>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
