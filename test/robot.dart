@@ -9,13 +9,15 @@ import 'accounts/accounts_robot.dart';
 import 'expenses/expenses_robot.dart';
 
 class Robot {
-  Robot(this.tester)
-      : accounts = AccountsRobot(tester),
-        expenses = ExpensesRobot(tester);
+  Robot(this.tester);
 
   final WidgetTester tester;
-  final AccountsRobot accounts;
-  final ExpensesRobot expenses;
+
+  AccountsRobot? _accounts;
+  AccountsRobot get accounts => _accounts ??= AccountsRobot(tester);
+
+  ExpensesRobot? _expenses;
+  ExpensesRobot get expenses => _expenses ??= ExpensesRobot(tester);
 
   Future<ProviderContainer> pumpApp({
     AccountsRepository? accountsRepository,
