@@ -6,11 +6,11 @@ part of 'core.providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$uuidGeneratorHash() => r'08443ddbd2053ba363b9a0aff78797bd8f974043';
+String _$uuidGeneratorHash() => r'b081530393045fdff0f3809fab6680c8b5d7e717';
 
 /// See also [uuidGenerator].
 @ProviderFor(uuidGenerator)
-final uuidGeneratorProvider = Provider<Uuid>.internal(
+final uuidGeneratorProvider = AutoDisposeProvider<Uuid>.internal(
   uuidGenerator,
   name: r'uuidGeneratorProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,7 @@ final uuidGeneratorProvider = Provider<Uuid>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef UuidGeneratorRef = ProviderRef<Uuid>;
+typedef UuidGeneratorRef = AutoDisposeProviderRef<Uuid>;
 String _$initializationHash() => r'60318a785ffc731e132dc6ad28b764fe603d6626';
 
 /// See also [initialization].

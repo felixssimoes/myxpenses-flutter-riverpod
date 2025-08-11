@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 
 part 'core.providers.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Uuid uuidGenerator(Ref _) => const Uuid();
 
 @riverpod

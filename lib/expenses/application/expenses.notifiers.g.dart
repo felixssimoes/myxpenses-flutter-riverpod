@@ -6,7 +6,7 @@ part of 'expenses.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$expensesHash() => r'57493092f38a8ee2c86f24cb21590dca04169c4e';
+String _$expensesHash() => r'e306e324b19e872e361f5008a514a2a365b77732';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -72,7 +72,7 @@ class ExpensesFamily extends Family<AsyncValue<List<ExpenseModel>>> {
 }
 
 /// See also [expenses].
-class ExpensesProvider extends FutureProvider<List<ExpenseModel>> {
+class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
   /// See also [expenses].
   ExpensesProvider({
     required String accountId,
@@ -123,7 +123,7 @@ class ExpensesProvider extends FutureProvider<List<ExpenseModel>> {
   }
 
   @override
-  FutureProviderElement<List<ExpenseModel>> createElement() {
+  AutoDisposeFutureProviderElement<List<ExpenseModel>> createElement() {
     return _ExpensesProviderElement(this);
   }
 
@@ -143,12 +143,13 @@ class ExpensesProvider extends FutureProvider<List<ExpenseModel>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ExpensesRef on FutureProviderRef<List<ExpenseModel>> {
+mixin ExpensesRef on AutoDisposeFutureProviderRef<List<ExpenseModel>> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
-class _ExpensesProviderElement extends FutureProviderElement<List<ExpenseModel>>
+class _ExpensesProviderElement
+    extends AutoDisposeFutureProviderElement<List<ExpenseModel>>
     with ExpensesRef {
   _ExpensesProviderElement(super.provider);
 
@@ -156,7 +157,7 @@ class _ExpensesProviderElement extends FutureProviderElement<List<ExpenseModel>>
   String get accountId => (origin as ExpensesProvider).accountId;
 }
 
-String _$expenseHash() => r'a96bd80e8ff51d0ee4a3ef9cc71af227ae35b210';
+String _$expenseHash() => r'5787f1bd0c031d3d233047306d40068fe9c7bf74';
 
 /// See also [expense].
 @ProviderFor(expense)
@@ -201,7 +202,7 @@ class ExpenseFamily extends Family<AsyncValue<ExpenseModel?>> {
 }
 
 /// See also [expense].
-class ExpenseProvider extends FutureProvider<ExpenseModel?> {
+class ExpenseProvider extends AutoDisposeFutureProvider<ExpenseModel?> {
   /// See also [expense].
   ExpenseProvider({
     required String expenseId,
@@ -252,7 +253,7 @@ class ExpenseProvider extends FutureProvider<ExpenseModel?> {
   }
 
   @override
-  FutureProviderElement<ExpenseModel?> createElement() {
+  AutoDisposeFutureProviderElement<ExpenseModel?> createElement() {
     return _ExpenseProviderElement(this);
   }
 
@@ -272,13 +273,13 @@ class ExpenseProvider extends FutureProvider<ExpenseModel?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ExpenseRef on FutureProviderRef<ExpenseModel?> {
+mixin ExpenseRef on AutoDisposeFutureProviderRef<ExpenseModel?> {
   /// The parameter `expenseId` of this provider.
   String get expenseId;
 }
 
-class _ExpenseProviderElement extends FutureProviderElement<ExpenseModel?>
-    with ExpenseRef {
+class _ExpenseProviderElement
+    extends AutoDisposeFutureProviderElement<ExpenseModel?> with ExpenseRef {
   _ExpenseProviderElement(super.provider);
 
   @override

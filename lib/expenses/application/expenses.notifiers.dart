@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'expenses.notifiers.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<List<ExpenseModel>> expenses(
   Ref ref, {
   required String accountId,
@@ -22,7 +22,7 @@ Future<List<ExpenseModel>> expenses(
       );
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<ExpenseModel?> expense(
   Ref ref, {
   required String expenseId,

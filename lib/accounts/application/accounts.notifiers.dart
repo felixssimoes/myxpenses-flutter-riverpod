@@ -6,11 +6,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'accounts.notifiers.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<List<AccountModel>> accounts(Ref ref) =>
     ref.watch(accountsRepositoryProvider).loadAccounts();
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<AccountModel?> account(Ref ref, String accountId) async {
   final accounts = await ref.watch(accountsProvider.future);
   try {
@@ -22,7 +22,7 @@ Future<AccountModel?> account(Ref ref, String accountId) async {
 
 typedef AccountView = ({AccountModel account, double total});
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<List<AccountView>> accountsView(Ref ref) async {
   final accounts = await ref.watch(accountsProvider.future);
   final interval = ref.watch(dateIntervalProvider);
@@ -31,18 +31,21 @@ Future<List<AccountView>> accountsView(Ref ref) async {
     return accounts.map((account) => (account: account, total: 0.0)).toList();
   }
 
-  final totals = await ref.watch(expensesRepositoryProvider).loadAllAccountTotals(
-    startDate: interval.startDate,
-    endDate: interval.endDate,
-  );
+  final totals =
+      await ref.watch(expensesRepositoryProvider).loadAllAccountTotals(
+            startDate: interval.startDate,
+            endDate: interval.endDate,
+          );
 
-  return accounts.map((account) => (
-    account: account,
-    total: totals[account.id] ?? 0.0,
-  )).toList();
+  return accounts
+      .map((account) => (
+            account: account,
+            total: totals[account.id] ?? 0.0,
+          ))
+      .toList();
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 Future<AccountView?> accountView(Ref ref, String accountId) async {
   final accounts = await ref.watch(accountsViewProvider.future);
   try {

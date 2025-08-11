@@ -6,11 +6,11 @@ part of 'date_interval.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dateIntervalHash() => r'1a397089ef9a5b159affbb5f55c2c9c9b75a7fef';
+String _$dateIntervalHash() => r'fb45fc06ab78c21c79f6af02414f58d34aae3012';
 
 /// See also [dateInterval].
 @ProviderFor(dateInterval)
-final dateIntervalProvider = Provider<DateInterval?>.internal(
+final dateIntervalProvider = AutoDisposeProvider<DateInterval?>.internal(
   dateInterval,
   name: r'dateIntervalProvider',
   debugGetCreateSourceHash:
@@ -21,6 +21,6 @@ final dateIntervalProvider = Provider<DateInterval?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef DateIntervalRef = ProviderRef<DateInterval?>;
+typedef DateIntervalRef = AutoDisposeProviderRef<DateInterval?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -840,7 +840,7 @@ class $MyXpensesDatabaseManager {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$databaseHash() => r'16a91d13b6c908a344a71553dc6cf7c65f47676e';
+String _$databaseHash() => r'ad17d18014aa1991f02320af70397b9cdaa16354';
 
 /// See also [database].
 @ProviderFor(database)

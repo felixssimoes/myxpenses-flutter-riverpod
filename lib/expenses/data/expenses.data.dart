@@ -6,5 +6,5 @@ import 'expenses.repository.dart';
 
 part 'expenses.data.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 ExpensesRepository expensesRepository(Ref ref) => DBExpensesRepository(ref);

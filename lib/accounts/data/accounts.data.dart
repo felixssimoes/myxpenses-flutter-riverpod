@@ -8,5 +8,5 @@ export 'accounts.repository.dart';
 
 part 'accounts.data.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 AccountsRepository accountsRepository(Ref ref) => DBAccountsRepository(ref);

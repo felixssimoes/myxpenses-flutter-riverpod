@@ -20,6 +20,8 @@ MyXpensesDatabase database(Ref ref) {
     'Database open schema: ${database.schemaVersion}',
     name: 'db',
   );
+  // Ensure the database is gracefully closed when the provider container is disposed
+  ref.onDispose(() => database.close());
   return database;
 }
 

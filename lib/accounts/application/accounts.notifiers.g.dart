@@ -6,11 +6,11 @@ part of 'accounts.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$accountsHash() => r'6f7a623656c3bcc94d101094cd6c8a94de100078';
+String _$accountsHash() => r'8c4206bd93af8465a67ed9414595a550afa6a095';
 
 /// See also [accounts].
 @ProviderFor(accounts)
-final accountsProvider = FutureProvider<List<AccountModel>>.internal(
+final accountsProvider = AutoDisposeFutureProvider<List<AccountModel>>.internal(
   accounts,
   name: r'accountsProvider',
   debugGetCreateSourceHash:
@@ -21,8 +21,8 @@ final accountsProvider = FutureProvider<List<AccountModel>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AccountsRef = FutureProviderRef<List<AccountModel>>;
-String _$accountHash() => r'45632baa4a38b0d6d9efb0db6ad786dc88ad6536';
+typedef AccountsRef = AutoDisposeFutureProviderRef<List<AccountModel>>;
+String _$accountHash() => r'6aec7b15376235083f28b85c5f2cb09375045a53';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -88,7 +88,7 @@ class AccountFamily extends Family<AsyncValue<AccountModel?>> {
 }
 
 /// See also [account].
-class AccountProvider extends FutureProvider<AccountModel?> {
+class AccountProvider extends AutoDisposeFutureProvider<AccountModel?> {
   /// See also [account].
   AccountProvider(
     String accountId,
@@ -139,7 +139,7 @@ class AccountProvider extends FutureProvider<AccountModel?> {
   }
 
   @override
-  FutureProviderElement<AccountModel?> createElement() {
+  AutoDisposeFutureProviderElement<AccountModel?> createElement() {
     return _AccountProviderElement(this);
   }
 
@@ -159,24 +159,25 @@ class AccountProvider extends FutureProvider<AccountModel?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin AccountRef on FutureProviderRef<AccountModel?> {
+mixin AccountRef on AutoDisposeFutureProviderRef<AccountModel?> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
-class _AccountProviderElement extends FutureProviderElement<AccountModel?>
-    with AccountRef {
+class _AccountProviderElement
+    extends AutoDisposeFutureProviderElement<AccountModel?> with AccountRef {
   _AccountProviderElement(super.provider);
 
   @override
   String get accountId => (origin as AccountProvider).accountId;
 }
 
-String _$accountsViewHash() => r'2a5fb3c1eb4cecb9121427686097e51817802116';
+String _$accountsViewHash() => r'9550b4f145e3b07104b75f6398ed489a3cceae1f';
 
 /// See also [accountsView].
 @ProviderFor(accountsView)
-final accountsViewProvider = FutureProvider<List<AccountView>>.internal(
+final accountsViewProvider =
+    AutoDisposeFutureProvider<List<AccountView>>.internal(
   accountsView,
   name: r'accountsViewProvider',
   debugGetCreateSourceHash:
@@ -187,8 +188,8 @@ final accountsViewProvider = FutureProvider<List<AccountView>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AccountsViewRef = FutureProviderRef<List<AccountView>>;
-String _$accountViewHash() => r'27e23e359ead9e057aa99c4fedb60805cba00bcc';
+typedef AccountsViewRef = AutoDisposeFutureProviderRef<List<AccountView>>;
+String _$accountViewHash() => r'ee51c89f84cef1bc1ecddda7d6089e6a89ae9db4';
 
 /// See also [accountView].
 @ProviderFor(accountView)
@@ -233,7 +234,7 @@ class AccountViewFamily extends Family<AsyncValue<AccountView?>> {
 }
 
 /// See also [accountView].
-class AccountViewProvider extends FutureProvider<AccountView?> {
+class AccountViewProvider extends AutoDisposeFutureProvider<AccountView?> {
   /// See also [accountView].
   AccountViewProvider(
     String accountId,
@@ -285,7 +286,7 @@ class AccountViewProvider extends FutureProvider<AccountView?> {
   }
 
   @override
-  FutureProviderElement<AccountView?> createElement() {
+  AutoDisposeFutureProviderElement<AccountView?> createElement() {
     return _AccountViewProviderElement(this);
   }
 
@@ -305,13 +306,13 @@ class AccountViewProvider extends FutureProvider<AccountView?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin AccountViewRef on FutureProviderRef<AccountView?> {
+mixin AccountViewRef on AutoDisposeFutureProviderRef<AccountView?> {
   /// The parameter `accountId` of this provider.
   String get accountId;
 }
 
-class _AccountViewProviderElement extends FutureProviderElement<AccountView?>
-    with AccountViewRef {
+class _AccountViewProviderElement
+    extends AutoDisposeFutureProviderElement<AccountView?> with AccountViewRef {
   _AccountViewProviderElement(super.provider);
 
   @override

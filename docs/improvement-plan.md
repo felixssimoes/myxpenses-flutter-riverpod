@@ -182,9 +182,9 @@ class MyXpensesDatabase extends _$MyXpensesDatabase {
 **Priority**: 🔴 HIGH
 
 #### Solution
-- [ ] Audit all providers with `keepAlive: true`
-- [ ] Implement proper provider disposal
-- [ ] Add provider dependency declarations
+- [x] Audit all providers with `keepAlive: true`
+- [x] Implement proper provider disposal
+- [x] Add provider dependency declarations
 
 #### Changes Required
 ```dart
@@ -207,7 +207,12 @@ Future<List<ExpenseModel>> expenses(ExpensesRef ref, {required String accountId}
 }
 ```
 
-**Progress**: ⬜ Not Started
+**Progress**: ✅ Done
+
+Notes:
+- Kept `database` and `navigatorKey` providers as `keepAlive: true`.
+- All repositories, services, and async notifiers switched to auto-dispose (`@riverpod`).
+- Added `ref.onDispose(() => database.close())` to ensure DB connection is closed.
 
 ---
 

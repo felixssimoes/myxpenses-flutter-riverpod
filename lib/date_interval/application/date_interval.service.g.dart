@@ -7,11 +7,12 @@ part of 'date_interval.service.dart';
 // **************************************************************************
 
 String _$dateIntervalServiceHash() =>
-    r'85376ff6780f7787e838a69a010c9c2264595068';
+    r'66e103dd195f6c70bccb8f31ec901de38a4a5e11';
 
 /// See also [dateIntervalService].
 @ProviderFor(dateIntervalService)
-final dateIntervalServiceProvider = Provider<DateIntervalService>.internal(
+final dateIntervalServiceProvider =
+    AutoDisposeProvider<DateIntervalService>.internal(
   dateIntervalService,
   name: r'dateIntervalServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -23,6 +24,6 @@ final dateIntervalServiceProvider = Provider<DateIntervalService>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef DateIntervalServiceRef = ProviderRef<DateIntervalService>;
+typedef DateIntervalServiceRef = AutoDisposeProviderRef<DateIntervalService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

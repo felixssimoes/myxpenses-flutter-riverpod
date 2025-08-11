@@ -4,6 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'date_interval.notifiers.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 DateInterval? dateInterval(Ref ref) =>
     ref.watch(dateIntervalRepositoryProvider).dateInterval;
