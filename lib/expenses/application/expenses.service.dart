@@ -28,28 +28,28 @@ class ExpensesService {
     );
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).insertExpense(expense);
-  // Invalidate only the affected account’s providers
-  _ref.invalidate(expensesProvider(accountId: accountId));
-  _ref.invalidate(accountViewProvider(accountId));
-  _ref.invalidate(accountsViewProvider);
+    // Invalidate only the affected account’s providers
+    _ref.invalidate(expensesProvider(accountId: accountId));
+    _ref.invalidate(accountViewProvider(accountId));
+    _ref.invalidate(accountsViewProvider);
     return expense;
   }
 
   Future<void> updateExpense(ExpenseModel expense) async {
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).updateExpense(expense);
-  _ref.invalidate(expenseProvider(expenseId: expense.id));
-  _ref.invalidate(expensesProvider(accountId: expense.accountId));
-  _ref.invalidate(accountViewProvider(expense.accountId));
-  _ref.invalidate(accountsViewProvider);
+    _ref.invalidate(expenseProvider(expenseId: expense.id));
+    _ref.invalidate(expensesProvider(accountId: expense.accountId));
+    _ref.invalidate(accountViewProvider(expense.accountId));
+    _ref.invalidate(accountsViewProvider);
   }
 
   Future<void> deleteExpense(ExpenseModel expense) async {
     await _ref.read(expensesRepositoryProvider).deleteExpense(expense);
-  _ref.invalidate(expenseProvider(expenseId: expense.id));
-  _ref.invalidate(expensesProvider(accountId: expense.accountId));
-  _ref.invalidate(accountViewProvider(expense.accountId));
-  _ref.invalidate(accountsViewProvider);
+    _ref.invalidate(expenseProvider(expenseId: expense.id));
+    _ref.invalidate(expensesProvider(accountId: expense.accountId));
+    _ref.invalidate(accountViewProvider(expense.accountId));
+    _ref.invalidate(accountsViewProvider);
   }
 
   Future<void> _validateExpense(ExpenseModel expense) async {

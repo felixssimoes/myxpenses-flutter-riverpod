@@ -28,8 +28,8 @@ void main() {
     await r.expenses.create.tapCreateExpense();
 
     r.accounts.details.expectFindNExpenses(1);
-  await tester.pumpAndSettle();
-  r.accounts.details.expectAccountTotal('10.00');
+    await tester.pumpAndSettle();
+    r.accounts.details.expectAccountTotal('10.00');
     expect(find.text('Food'), findsOneWidget);
     expect(
       find.descendant(
@@ -45,8 +45,8 @@ void main() {
     await r.expenses.create.setExpenseAmount('11.00');
     await r.expenses.edit.tapUpdateExpense();
     r.accounts.details.expectFindNExpenses(1);
-  await tester.pumpAndSettle();
-  r.accounts.details.expectAccountTotal('11.00');
+    await tester.pumpAndSettle();
+    r.accounts.details.expectAccountTotal('11.00');
     expect(find.text('Food'), findsNothing);
     expect(find.text('10.00'), findsNothing);
     expect(find.text('Lunch'), findsOneWidget);
@@ -67,8 +67,8 @@ void main() {
       findsNothing,
     );
     r.accounts.details.expectFindNExpenses(0);
-  await tester.pumpAndSettle();
-  r.accounts.details.expectAccountTotal('0.00');
+    await tester.pumpAndSettle();
+    r.accounts.details.expectAccountTotal('0.00');
     expect(find.text('Food'), findsNothing);
     expect(find.text('10.00'), findsNothing);
     expect(find.text('Lunch'), findsNothing);
