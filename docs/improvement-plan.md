@@ -39,8 +39,8 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
 ```
 
 #### Solution
-- [ ] Create a batch query method in `ExpensesRepository`
-- [ ] Implement SQL aggregation for account totals
+- [x] Create a batch query method in `ExpensesRepository`
+- [x] Implement SQL aggregation for account totals
 - [ ] Add database indexes for better performance
 
 #### Implementation Steps
