@@ -48,3 +48,22 @@ class InvalidExpenseAmountException extends AppException {
           message: 'Please enter a valid expense amount.',
         );
 }
+
+/// Database
+
+class DatabaseException extends AppException {
+  DatabaseException(String message)
+      : super._(
+          code: 'database_error',
+          message: message,
+        );
+}
+
+class DatabaseCorruptionException extends AppException {
+  DatabaseCorruptionException()
+      : super._(
+          code: 'database_corruption',
+          message:
+              'The local database appears to be corrupted. Please restart the app or reinstall.',
+        );
+}

@@ -72,6 +72,15 @@ class MyXpensesDatabase extends _$MyXpensesDatabase {
           await customStatement(
             'CREATE INDEX IF NOT EXISTS idx_expenses_date ON expenses_table(date)',
           );
+
+          // Verify database integrity to catch corruption early
+          final result = await customSelect('PRAGMA integrity_check').get();
+          // The pragma returns a single-row, single-column table where the
+          // column name is 'integrity_check' and the value is 'ok' on success.
+          final status = result.first.read<String>('integrity_check');
+          if (status.toLowerCase() != 'ok') {
+            throw DatabaseCorruptionException();
+          }
         },
       );
 }

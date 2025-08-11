@@ -10,6 +10,21 @@ This document outlines new features and enhancements for the MyXpenses Flutter a
 
 ## ✨ NEW FEATURES & ENHANCEMENTS
 
+### 0. Expense Notes field (Small)
+
+**Timeline**: 1-2 days
+**Priority**: 🟡 MEDIUM
+
+Allow users to add an optional notes/description field to an expense for disambiguation and extra details.
+
+Implementation outline:
+- Add `notes` as an optional `String?` to `ExpenseModel` and persistence layer (nullable column).
+- Update create/edit expense screens to include an optional multiline text field.
+- Migrate DB to add nullable `notes` column to `expenses_table`.
+- Display notes in expense list rows when present (subtitle or expandable tile).
+
+Status: ⬜ Not Started
+
 ### 1. Search and Filtering System
 
 **Timeline**: 2 weeks
