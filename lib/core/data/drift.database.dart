@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/core/data/migrations/migrations.dart' as migrations;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod/riverpod.dart';
@@ -40,13 +41,23 @@ class MyXpensesDatabase extends _$MyXpensesDatabase {
   MyXpensesDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2; // Increment when schema changes
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (Migrator m) async {
+          // Create all drift-managed tables
+          await m.createAll();
+        },
+        onUpgrade: (Migrator m, int from, int to) async {
+          // Route versioned migrations through helper to keep this tidy
+          if (from < 2) {
+            await migrations.migrateFrom1To2(m);
+          }
+        },
         // Create helpful indexes and enable foreign keys on every open.
         // Using IF NOT EXISTS makes this safe across app restarts without
-        // requiring a schema bump yet.
+        // requiring a schema bump.
         beforeOpen: (details) async {
           await customStatement('PRAGMA foreign_keys = ON');
 
