@@ -82,6 +82,7 @@ class AlertInfo extends Equatable {
         text: exception.message,
       );
     }
+    // Fallback for unknown errors
     return AlertInfo(
       title: 'Error',
       text: 'Something went wrong. Please try again.',

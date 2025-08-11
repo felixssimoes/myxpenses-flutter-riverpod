@@ -227,7 +227,7 @@ Notes:
 - [x] Better error recovery for database operations
 - [x] Transaction rollback on failures
 - [x] Data validation at multiple layers
-- [ ] User-friendly error messages
+- [x] User-friendly error messages
 
 #### Implementation Plan
 1. **Add robust error handling to repositories**
@@ -278,13 +278,13 @@ class MyXpensesDatabase extends _$MyXpensesDatabase {
 }
 ```
 
-**Progress**: 🟡 In Progress
+**Progress**: ✅ Done
 
 Notes:
-- Repositories wrap DB operations in transactions (insert/update) and convert SqliteException into domain `DatabaseException`s.
-- Drift database enables foreign keys, creates helpful indexes, and runs `PRAGMA integrity_check` on open.
-- Services validate inputs (e.g., non-empty category/name, positive amount, unique account name).
-- Pending: Map low-level errors to user-friendly UI messages and surface them consistently in controllers/screens.
+- Repositories wrap DB operations in transactions and map SqliteException to friendly domain exceptions.
+- Drift DB enables foreign keys, adds helpful indexes, and runs integrity checks on open.
+- Services validate inputs (category/name not empty, amount > 0, unique account name).
+- UI controllers/screens surface errors via `showExceptionAlertDialog` using `AlertInfo.fromException` with user-friendly messages.
 
 ---
 
