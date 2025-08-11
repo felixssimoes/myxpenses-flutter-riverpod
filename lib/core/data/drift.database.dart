@@ -41,6 +41,26 @@ class MyXpensesDatabase extends _$MyXpensesDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        // Create helpful indexes and enable foreign keys on every open.
+        // Using IF NOT EXISTS makes this safe across app restarts without
+        // requiring a schema bump yet.
+        beforeOpen: (details) async {
+          await customStatement('PRAGMA foreign_keys = ON');
+
+          // Index to speed up queries filtering by account and date
+          await customStatement(
+            'CREATE INDEX IF NOT EXISTS idx_expenses_account_date ON expenses_table(account_id, date)',
+          );
+
+          // Index to speed up date range scans and aggregations by date
+          await customStatement(
+            'CREATE INDEX IF NOT EXISTS idx_expenses_date ON expenses_table(date)',
+          );
+        },
+      );
 }
 
 LazyDatabase _openConnection() {

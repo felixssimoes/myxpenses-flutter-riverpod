@@ -41,7 +41,7 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
 #### Solution
 - [x] Create a batch query method in `ExpensesRepository`
 - [x] Implement SQL aggregation for account totals
-- [ ] Add database indexes for better performance
+- [x] Add database indexes for better performance
 
 #### Implementation Steps
 1. **Add batch totals method to ExpensesRepository**
@@ -49,8 +49,8 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
 // Add to lib/expenses/data/expenses.repository.dart
 abstract class ExpensesRepository {
   // ... existing methods
-  Future<Map<String, double>> loadAccountTotals({
-    required List<String> accountIds,
+  // Implemented as loadAllAccountTotals in the codebase
+  Future<Map<String, double>> loadAllAccountTotals({
     required DateTime startDate,
     required DateTime endDate,
   });
@@ -61,8 +61,7 @@ abstract class ExpensesRepository {
 ```dart
 // Update lib/expenses/data/db_expenses.repository.dart
 @override
-Future<Map<String, double>> loadAccountTotals({
-  required List<String> accountIds,
+Future<Map<String, double>> loadAllAccountTotals({
   required DateTime startDate,
   required DateTime endDate,
 }) async {
@@ -70,12 +69,10 @@ Future<Map<String, double>> loadAccountTotals({
     '''
     SELECT account_id, SUM(amount) as total
     FROM expenses_table
-    WHERE account_id IN (${accountIds.map((_) => '?').join(',')})
-      AND date >= ? AND date < ?
+    WHERE date >= ? AND date < ?
     GROUP BY account_id
     ''',
     variables: [
-      ...accountIds.map((id) => Variable.withString(id)),
       Variable.withDateTime(startDate),
       Variable.withDateTime(endDate),
     ],
@@ -84,7 +81,7 @@ Future<Map<String, double>> loadAccountTotals({
   return Map.fromEntries(
     result.map((row) => MapEntry(
       row.read<String>('account_id'),
-      row.read<double>('total'),
+      row.readNullable<double>('total') ?? 0.0,
     )),
   );
 }
@@ -102,9 +99,7 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
     return accounts.map((account) => (account: account, total: 0.0)).toList();
   }
 
-  final accountIds = accounts.map((account) => account.id).toList();
-  final totals = await ref.watch(expensesRepositoryProvider).loadAccountTotals(
-    accountIds: accountIds,
+  final totals = await ref.watch(expensesRepositoryProvider).loadAllAccountTotals(
     startDate: interval.startDate,
     endDate: interval.endDate,
   );
@@ -116,7 +111,20 @@ Future<List<AccountView>> accountsView(AccountsViewRef ref) async {
 }
 ```
 
-**Progress**: ⬜ Not Started
+4. **Add database indexes**
+```dart
+// Update lib/core/data/drift.database.dart
+@override
+MigrationStrategy get migration => MigrationStrategy(
+  beforeOpen: (details) async {
+    await customStatement('PRAGMA foreign_keys = ON');
+    await customStatement('CREATE INDEX IF NOT EXISTS idx_expenses_account_date ON expenses_table(account_id, date)');
+    await customStatement('CREATE INDEX IF NOT EXISTS idx_expenses_date ON expenses_table(date)');
+  },
+);
+```
+
+**Progress**: ✅ Done
 
 ---
 
