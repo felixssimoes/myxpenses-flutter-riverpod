@@ -1,4 +1,5 @@
 import 'package:myxpenses/accounts/accounts.dart';
+import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -24,17 +25,21 @@ typedef AccountView = ({AccountModel account, double total});
 @Riverpod(keepAlive: true)
 Future<List<AccountView>> accountsView(Ref ref) async {
   final accounts = await ref.watch(accountsProvider.future);
-  final accountsView = <AccountView>[];
-  for (final account in accounts) {
-    final expenses =
-        await ref.watch(expensesProvider(accountId: account.id).future);
-    final total = expenses
-        .where((expense) => expense.accountId == account.id)
-        .fold<double>(
-            0, (previousValue, expense) => previousValue + expense.amount);
-    accountsView.add((account: account, total: total));
+  final interval = ref.watch(dateIntervalProvider);
+
+  if (interval == null || accounts.isEmpty) {
+    return accounts.map((account) => (account: account, total: 0.0)).toList();
   }
-  return accountsView;
+
+  final totals = await ref.watch(expensesRepositoryProvider).loadAllAccountTotals(
+    startDate: interval.startDate,
+    endDate: interval.endDate,
+  );
+
+  return accounts.map((account) => (
+    account: account,
+    total: totals[account.id] ?? 0.0,
+  )).toList();
 }
 
 @Riverpod(keepAlive: true)

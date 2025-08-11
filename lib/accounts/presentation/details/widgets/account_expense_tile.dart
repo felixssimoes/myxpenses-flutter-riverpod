@@ -19,7 +19,7 @@ class AccountExpenseTile extends ConsumerWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(expense.amount.toString()),
+          Text(expense.amount.toStringAsFixed(2)),
           const Icon(Icons.chevron_right),
         ],
       ),

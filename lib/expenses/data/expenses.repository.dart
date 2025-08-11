@@ -20,4 +20,10 @@ abstract class ExpensesRepository {
   Future<void> updateExpense(ExpenseModel expense);
   Future<void> deleteExpense(ExpenseModel expense);
   Future<void> deleteAllExpensesForAccount(String accountId);
+
+  /// Load all account totals in batch to avoid N+1 query problem
+  Future<Map<String, double>> loadAllAccountTotals({
+    required DateTime startDate,
+    required DateTime endDate,
+  });
 }

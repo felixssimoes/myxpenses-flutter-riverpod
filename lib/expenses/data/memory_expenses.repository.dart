@@ -29,7 +29,12 @@ class InMemoryExpensesRepository implements ExpensesRepository {
     required DateTime startDate,
     required DateTime endDate,
   }) async {
-    return _expenses;
+    return _expenses
+        .where((expense) => 
+            expense.accountId == accountId &&
+            !expense.date.isBefore(startDate) &&
+            expense.date.isBefore(endDate))
+        .toList();
   }
 
   @override
@@ -44,5 +49,22 @@ class InMemoryExpensesRepository implements ExpensesRepository {
   @override
   Future<void> deleteAllExpensesForAccount(String accountId) async {
     _expenses.removeWhere((a) => a.accountId == accountId);
+  }
+
+  @override
+  Future<Map<String, double>> loadAllAccountTotals({
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    final Map<String, double> totals = {};
+    
+    // Group expenses by account and calculate totals
+    for (final expense in _expenses) {
+      if (!expense.date.isBefore(startDate) && expense.date.isBefore(endDate)) {
+        totals[expense.accountId] = (totals[expense.accountId] ?? 0.0) + expense.amount;
+      }
+    }
+    
+    return totals;
   }
 }

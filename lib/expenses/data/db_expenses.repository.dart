@@ -98,4 +98,30 @@ class DBExpensesRepository implements ExpensesRepository {
       name: 'db',
     );
   }
+
+  @override
+  Future<Map<String, double>> loadAllAccountTotals({
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    final result = await _db.customSelect(
+      '''
+      SELECT account_id, SUM(amount) as total
+      FROM expenses_table
+      WHERE date >= ? AND date < ?
+      GROUP BY account_id
+      ''',
+      variables: [
+        Variable.withDateTime(startDate),
+        Variable.withDateTime(endDate),
+      ],
+    ).get();
+
+    return Map.fromEntries(
+      result.map((row) => MapEntry(
+        row.read<String>('account_id'),
+        row.readNullable<double>('total') ?? 0.0,
+      )),
+    );
+  }
 }

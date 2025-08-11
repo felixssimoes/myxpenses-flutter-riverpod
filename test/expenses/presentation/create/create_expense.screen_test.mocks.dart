@@ -220,4 +220,21 @@ class MockExpensesRepository extends _i1.Mock
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<Map<String, double>> loadAllAccountTotals({
+    required DateTime? startDate,
+    required DateTime? endDate,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loadAllAccountTotals,
+          [],
+          {
+            #startDate: startDate,
+            #endDate: endDate,
+          },
+        ),
+        returnValue: _i7.Future<Map<String, double>>.value(<String, double>{}),
+      ) as _i7.Future<Map<String, double>>);
 }
