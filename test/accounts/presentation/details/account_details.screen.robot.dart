@@ -58,6 +58,13 @@ class AccountDetailsScreenRobot {
     expect(finder, findsNWidgets(n));
   }
 
+  void expectAccountTotal(String total) {
+    final finder = find.byKey(const Key('account_total_text'));
+    expect(finder, findsOneWidget);
+  final textWidget = tester.widget<Text>(finder);
+  expect(textWidget.data, total);
+  }
+
   Future<void> tapEditAccount() async {
     final finder = expectFindEditAccountButton();
     await tester.tap(finder);

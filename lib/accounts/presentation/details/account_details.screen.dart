@@ -38,7 +38,10 @@ class AccountDetailsScreen extends ConsumerWidget {
               height: 30,
               decoration: BoxDecoration(color: Colors.grey[200]),
               child: Center(
-                child: Text(accountView.valueOrNull!.total.toStringAsFixed(2)),
+                child: Text(
+                  accountView.valueOrNull!.total.toStringAsFixed(2),
+                  key: const Key('account_total_text'),
+                ),
               ),
             ),
           Expanded(

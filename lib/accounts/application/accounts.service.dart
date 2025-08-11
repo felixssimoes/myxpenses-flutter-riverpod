@@ -38,8 +38,9 @@ class AccountsService {
         .read(expensesRepositoryProvider)
         .deleteAllExpensesForAccount(account.id);
     _ref.invalidate(accountsProvider);
-    _ref.invalidate(expensesProvider);
-    _ref.invalidate(expenseProvider);
+  _ref.invalidate(expensesProvider);
+  _ref.invalidate(expenseProvider);
+  _ref.invalidate(accountsViewProvider);
   }
 
   Future<void> _validateAccountName({

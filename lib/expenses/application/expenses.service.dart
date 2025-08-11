@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -27,21 +28,28 @@ class ExpensesService {
     );
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).insertExpense(expense);
-    _ref.invalidate(expensesProvider);
+  // Invalidate only the affected account’s providers
+  _ref.invalidate(expensesProvider(accountId: accountId));
+  _ref.invalidate(accountViewProvider(accountId));
+  _ref.invalidate(accountsViewProvider);
     return expense;
   }
 
   Future<void> updateExpense(ExpenseModel expense) async {
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).updateExpense(expense);
-    _ref.invalidate(expensesProvider);
-    _ref.invalidate(expenseProvider(expenseId: expense.id));
+  _ref.invalidate(expenseProvider(expenseId: expense.id));
+  _ref.invalidate(expensesProvider(accountId: expense.accountId));
+  _ref.invalidate(accountViewProvider(expense.accountId));
+  _ref.invalidate(accountsViewProvider);
   }
 
   Future<void> deleteExpense(ExpenseModel expense) async {
     await _ref.read(expensesRepositoryProvider).deleteExpense(expense);
-    _ref.invalidate(expensesProvider);
-    _ref.invalidate(expenseProvider(expenseId: expense.id));
+  _ref.invalidate(expenseProvider(expenseId: expense.id));
+  _ref.invalidate(expensesProvider(accountId: expense.accountId));
+  _ref.invalidate(accountViewProvider(expense.accountId));
+  _ref.invalidate(accountsViewProvider);
   }
 
   Future<void> _validateExpense(ExpenseModel expense) async {

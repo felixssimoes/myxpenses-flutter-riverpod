@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:myxpenses/accounts/accounts.dart';
+import 'package:myxpenses/accounts/data/memory_accounts.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -9,6 +11,9 @@ void main() {
       final repo = InMemoryExpensesRepository();
       final container = ProviderContainer(overrides: [
         expensesRepositoryProvider.overrideWithValue(repo),
+        accountsRepositoryProvider.overrideWithValue(
+          InMemoryAccountsRepository(),
+        ),
       ]);
       addTearDown(container.dispose);
 
