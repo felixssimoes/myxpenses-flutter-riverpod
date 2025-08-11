@@ -224,9 +224,9 @@ Notes:
 **Priority**: 🟡 MEDIUM
 
 #### Features to Implement
-- [ ] Better error recovery for database operations
-- [ ] Transaction rollback on failures
-- [ ] Data validation at multiple layers
+- [x] Better error recovery for database operations
+- [x] Transaction rollback on failures
+- [x] Data validation at multiple layers
 - [ ] User-friendly error messages
 
 #### Implementation Plan
@@ -278,7 +278,13 @@ class MyXpensesDatabase extends _$MyXpensesDatabase {
 }
 ```
 
-**Progress**: ⬜ Not Started
+**Progress**: 🟡 In Progress
+
+Notes:
+- Repositories wrap DB operations in transactions (insert/update) and convert SqliteException into domain `DatabaseException`s.
+- Drift database enables foreign keys, creates helpful indexes, and runs `PRAGMA integrity_check` on open.
+- Services validate inputs (e.g., non-empty category/name, positive amount, unique account name).
+- Pending: Map low-level errors to user-friendly UI messages and surface them consistently in controllers/screens.
 
 ---
 
