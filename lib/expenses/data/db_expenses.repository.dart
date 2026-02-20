@@ -17,12 +17,19 @@ class DBExpensesRepository implements ExpensesRepository {
     required String accountId,
     required DateTime startDate,
     required DateTime endDate,
+    String? category,
   }) async {
-    final expensesTable = await (_db.select(_db.expensesTable)
-          ..where((tbl) => tbl.accountId.isValue(accountId))
-          ..where((tbl) => tbl.date.isBiggerOrEqualValue(startDate))
-          ..where((tbl) => tbl.date.isSmallerThanValue(endDate)))
-        .get();
+    final query = _db.select(_db.expensesTable)
+      ..where((tbl) => tbl.accountId.isValue(accountId))
+      ..where((tbl) => tbl.date.isBiggerOrEqualValue(startDate))
+      ..where((tbl) => tbl.date.isSmallerThanValue(endDate));
+
+    if (category != null) {
+      query.where((tbl) => tbl.category.isValue(category));
+    }
+
+    final expensesTable = await query.get();
+
     return expensesTable
         .map((row) => ExpenseModel(
               id: row.id,

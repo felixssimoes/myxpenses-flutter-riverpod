@@ -44,6 +44,15 @@ class AppRouter {
     );
   }
 
+  void openAccountExpenses(String accountId, {String? category}) {
+    _router.pushNamed(
+      Routes.accountExpenses.name,
+      pathParameters: {'account_id': accountId},
+      queryParameters:
+          category == null ? const {} : <String, String>{'category': category},
+    );
+  }
+
   void openEditAccount(String accountId) {
     _router.pushNamed(
       Routes.editAccount.name,
@@ -51,10 +60,11 @@ class AppRouter {
     );
   }
 
-  void openCreateExpense(String accountId) {
+  void openCreateExpense(String accountId, {String? category}) {
     _router.pushNamed(
       Routes.createExpense.name,
       pathParameters: {'account_id': accountId},
+      extra: category,
     );
   }
 
@@ -98,6 +108,14 @@ class AppRouter {
               ),
               routes: [
                 GoRoute(
+                  path: Routes.accountExpenses.path,
+                  name: Routes.accountExpenses.name,
+                  builder: (context, state) => AccountExpensesListScreen(
+                    accountId: state.pathParameters['account_id']!,
+                    category: state.uri.queryParameters['category'],
+                  ),
+                ),
+                GoRoute(
                   path: Routes.createExpense.path,
                   name: Routes.createExpense.name,
                   pageBuilder: (context, state) => MaterialPage<void>(
@@ -105,6 +123,7 @@ class AppRouter {
                     fullscreenDialog: true,
                     child: CreateExpenseScreen(
                       accountId: state.pathParameters['account_id']!,
+                      category: state.extra as String?,
                     ),
                   ),
                 ),

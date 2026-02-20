@@ -3,6 +3,7 @@ enum Routes {
   accountsList('/accounts'),
   createAccount('create'),
   accountDetails('details/:account_id'),
+  accountExpenses('expenses'),
   editAccount('edit/:account_id'),
 
   // expenses

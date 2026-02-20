@@ -6,7 +6,7 @@ part of 'expenses.notifiers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$expensesHash() => r'e306e324b19e872e361f5008a514a2a365b77732';
+String _$expensesHash() => r'7bd62e790ea8c46416bbcf67cc15adee8217259c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,9 +41,11 @@ class ExpensesFamily extends Family<AsyncValue<List<ExpenseModel>>> {
   /// See also [expenses].
   ExpensesProvider call({
     required String accountId,
+    String? category,
   }) {
     return ExpensesProvider(
       accountId: accountId,
+      category: category,
     );
   }
 
@@ -53,6 +55,7 @@ class ExpensesFamily extends Family<AsyncValue<List<ExpenseModel>>> {
   ) {
     return call(
       accountId: provider.accountId,
+      category: provider.category,
     );
   }
 
@@ -76,10 +79,12 @@ class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
   /// See also [expenses].
   ExpensesProvider({
     required String accountId,
+    String? category,
   }) : this._internal(
           (ref) => expenses(
             ref as ExpensesRef,
             accountId: accountId,
+            category: category,
           ),
           from: expensesProvider,
           name: r'expensesProvider',
@@ -90,6 +95,7 @@ class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
           dependencies: ExpensesFamily._dependencies,
           allTransitiveDependencies: ExpensesFamily._allTransitiveDependencies,
           accountId: accountId,
+          category: category,
         );
 
   ExpensesProvider._internal(
@@ -100,9 +106,11 @@ class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.accountId,
+    required this.category,
   }) : super.internal();
 
   final String accountId;
+  final String? category;
 
   @override
   Override overrideWith(
@@ -118,6 +126,7 @@ class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         accountId: accountId,
+        category: category,
       ),
     );
   }
@@ -129,13 +138,16 @@ class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
 
   @override
   bool operator ==(Object other) {
-    return other is ExpensesProvider && other.accountId == accountId;
+    return other is ExpensesProvider &&
+        other.accountId == accountId &&
+        other.category == category;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, accountId.hashCode);
+    hash = _SystemHash.combine(hash, category.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -146,6 +158,9 @@ class ExpensesProvider extends AutoDisposeFutureProvider<List<ExpenseModel>> {
 mixin ExpensesRef on AutoDisposeFutureProviderRef<List<ExpenseModel>> {
   /// The parameter `accountId` of this provider.
   String get accountId;
+
+  /// The parameter `category` of this provider.
+  String? get category;
 }
 
 class _ExpensesProviderElement
@@ -155,6 +170,8 @@ class _ExpensesProviderElement
 
   @override
   String get accountId => (origin as ExpensesProvider).accountId;
+  @override
+  String? get category => (origin as ExpensesProvider).category;
 }
 
 String _$expenseHash() => r'5787f1bd0c031d3d233047306d40068fe9c7bf74';

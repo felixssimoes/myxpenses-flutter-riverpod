@@ -9,6 +9,7 @@ part 'expenses.notifiers.g.dart';
 Future<List<ExpenseModel>> expenses(
   Ref ref, {
   required String accountId,
+  String? category,
 }) async {
   final interval = ref.watch(dateIntervalProvider);
   if (interval == null) {
@@ -19,6 +20,7 @@ Future<List<ExpenseModel>> expenses(
         accountId: accountId,
         startDate: interval.startDate,
         endDate: interval.endDate,
+        category: category,
       );
 }
 

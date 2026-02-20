@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
+import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,28 +29,28 @@ class ExpensesService {
     );
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).insertExpense(expense);
-    // Invalidate only the affected account’s providers
-    _ref.invalidate(expensesProvider(accountId: accountId));
-    _ref.invalidate(accountViewProvider(accountId));
-    _ref.invalidate(accountsViewProvider);
+    _invalidateExpenseRelatedProviders(
+        accountId: accountId, category: category);
     return expense;
   }
 
   Future<void> updateExpense(ExpenseModel expense) async {
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).updateExpense(expense);
-    _ref.invalidate(expenseProvider(expenseId: expense.id));
-    _ref.invalidate(expensesProvider(accountId: expense.accountId));
-    _ref.invalidate(accountViewProvider(expense.accountId));
-    _ref.invalidate(accountsViewProvider);
+    _invalidateExpenseRelatedProviders(
+      accountId: expense.accountId,
+      category: expense.category,
+      expenseId: expense.id,
+    );
   }
 
   Future<void> deleteExpense(ExpenseModel expense) async {
     await _ref.read(expensesRepositoryProvider).deleteExpense(expense);
-    _ref.invalidate(expenseProvider(expenseId: expense.id));
-    _ref.invalidate(expensesProvider(accountId: expense.accountId));
-    _ref.invalidate(accountViewProvider(expense.accountId));
-    _ref.invalidate(accountsViewProvider);
+    _invalidateExpenseRelatedProviders(
+      accountId: expense.accountId,
+      category: expense.category,
+      expenseId: expense.id,
+    );
   }
 
   Future<void> _validateExpense(ExpenseModel expense) async {
@@ -60,5 +61,33 @@ class ExpensesService {
     if (expense.amount <= 0) {
       throw InvalidExpenseAmountException();
     }
+  }
+
+  void _invalidateExpenseRelatedProviders({
+    required String accountId,
+    required String category,
+    String? expenseId,
+  }) {
+    final interval = _ref.read(dateIntervalProvider);
+
+    if (interval != null) {
+      _ref.invalidate(
+        categorySummariesProvider(
+          accountId: accountId,
+          dateInterval: interval,
+        ),
+      );
+    }
+
+    if (expenseId != null) {
+      _ref.invalidate(expenseProvider(expenseId: expenseId));
+    }
+
+    _ref.invalidate(expensesProvider(accountId: accountId));
+    _ref.invalidate(
+      expensesProvider(accountId: accountId, category: category),
+    );
+    _ref.invalidate(accountViewProvider(accountId));
+    _ref.invalidate(accountsViewProvider);
   }
 }

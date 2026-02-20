@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
 import 'package:myxpenses/date_interval/date_interval.dart';
-import 'package:myxpenses/expenses/expenses.dart';
+import 'package:myxpenses/expenses/application/category_summaries.notifier.dart';
+import 'package:myxpenses/expenses/domain/category_summary.model.dart';
 
-import 'widgets/account_expense_tile.dart';
+import 'widgets/category_summary_tile.dart';
 
 class AccountDetailsScreen extends ConsumerWidget {
   const AccountDetailsScreen({
@@ -18,6 +19,16 @@ class AccountDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final accountView = ref.watch(accountViewProvider(accountId));
+    final interval = ref.watch(dateIntervalProvider);
+
+    final categorySummariesValue = interval == null
+        ? const AsyncValue<List<CategorySummary>>.data([])
+        : ref.watch(
+            categorySummariesProvider(
+              accountId: accountId,
+              dateInterval: interval,
+            ),
+          );
     return Scaffold(
       appBar: AppBar(
         title: Text(accountView.valueOrNull?.account.name ?? ''),
@@ -46,14 +57,37 @@ class AccountDetailsScreen extends ConsumerWidget {
             ),
           Expanded(
             child: AsyncValueWidget(
-              value: ref.watch(expensesProvider(accountId: accountId)),
-              data: (expenses) {
-                expenses.sort((a, b) => b.date.compareTo(a.date));
+              value: categorySummariesValue,
+              data: (summaries) {
                 return ListView.builder(
-                  itemCount: expenses.length,
+                  itemCount: summaries.length,
                   itemBuilder: (context, index) {
-                    final expense = expenses[index];
-                    return AccountExpenseTile(expense: expense);
+                    final summary = summaries[index];
+                    final bool isAllCategories =
+                        summary.category.trim().isEmpty ||
+                            summary.category == 'All categories';
+
+                    final categoryTile = CategorySummaryTile(
+                      summary: summary,
+                      onTap: () => ref
+                          .read(appRouterProvider)
+                          .openAccountExpenses(
+                            accountId,
+                            category: isAllCategories ? null : summary.category,
+                          ),
+                    );
+
+                    if (isAllCategories) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          categoryTile,
+                          const Divider(height: 16),
+                        ],
+                      );
+                    }
+
+                    return categoryTile;
                   },
                 );
               },
@@ -62,9 +96,9 @@ class AccountDetailsScreen extends ConsumerWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
         onPressed: () =>
             ref.read(appRouterProvider).openCreateExpense(accountId),
+        child: const Icon(Icons.add),
       ),
     );
   }

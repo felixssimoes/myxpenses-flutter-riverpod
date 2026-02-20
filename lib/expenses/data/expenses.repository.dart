@@ -5,6 +5,7 @@ abstract class ExpensesRepository {
     required String accountId,
     required DateTime startDate,
     required DateTime endDate,
+    String? category,
   });
 
   /// Load a single expense by id.

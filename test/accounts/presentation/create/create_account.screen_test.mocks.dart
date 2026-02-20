@@ -110,6 +110,20 @@ class MockAppRouter extends _i1.Mock implements _i4.AppRouter {
       );
 
   @override
+  void openAccountExpenses(
+    String? accountId, {
+    String? category,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #openAccountExpenses,
+          [accountId],
+          {#category: category},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void openEditAccount(String? accountId) => super.noSuchMethod(
         Invocation.method(
           #openEditAccount,
@@ -119,10 +133,15 @@ class MockAppRouter extends _i1.Mock implements _i4.AppRouter {
       );
 
   @override
-  void openCreateExpense(String? accountId) => super.noSuchMethod(
+  void openCreateExpense(
+    String? accountId, {
+    String? category,
+  }) =>
+      super.noSuchMethod(
         Invocation.method(
           #openCreateExpense,
           [accountId],
+          {#category: category},
         ),
         returnValueForMissingStub: null,
       );

@@ -11,10 +11,12 @@ import '../widgets/expense_date.dart';
 class CreateExpenseScreen extends ConsumerStatefulWidget {
   const CreateExpenseScreen({
     required this.accountId,
+    this.category,
     super.key,
   });
 
   final String accountId;
+  final String? category;
 
   @override
   ConsumerState<CreateExpenseScreen> createState() =>
@@ -26,6 +28,12 @@ class _CreateExpenseScreenState extends ConsumerState<CreateExpenseScreen> {
   final _categoryController = TextEditingController();
   final _amountController = TextEditingController();
   var _date = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    _categoryController.text = widget.category ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {

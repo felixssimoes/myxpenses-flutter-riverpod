@@ -1,7 +1,9 @@
+export 'application/category_summaries.notifier.dart';
 export 'application/expenses.notifiers.dart';
 export 'application/expenses.service.dart';
 export 'data/expenses.data.dart';
 export 'data/memory_expenses.repository.dart';
+export 'domain/category_summary.model.dart';
 export 'domain/expense.model.dart';
 export 'presentation/create/create_expense.screen.dart';
 export 'presentation/edit/edit_expense.screen.dart';

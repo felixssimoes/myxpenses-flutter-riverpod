@@ -28,12 +28,14 @@ class InMemoryExpensesRepository implements ExpensesRepository {
     required String accountId,
     required DateTime startDate,
     required DateTime endDate,
+    String? category,
   }) async {
     return _expenses
-        .where((expense) => 
+        .where((expense) =>
             expense.accountId == accountId &&
             !expense.date.isBefore(startDate) &&
-            expense.date.isBefore(endDate))
+            expense.date.isBefore(endDate) &&
+            (category == null || expense.category == category))
         .toList();
   }
 
@@ -57,14 +59,15 @@ class InMemoryExpensesRepository implements ExpensesRepository {
     required DateTime endDate,
   }) async {
     final Map<String, double> totals = {};
-    
+
     // Group expenses by account and calculate totals
     for (final expense in _expenses) {
       if (!expense.date.isBefore(startDate) && expense.date.isBefore(endDate)) {
-        totals[expense.accountId] = (totals[expense.accountId] ?? 0.0) + expense.amount;
+        totals[expense.accountId] =
+            (totals[expense.accountId] ?? 0.0) + expense.amount;
       }
     }
-    
+
     return totals;
   }
 }
