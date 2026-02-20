@@ -11,7 +11,7 @@ typedef DateInterval = ({
   DateTime endDate,
 });
 
-@riverpod
+@Riverpod(keepAlive: true)
 DateIntervalRepository dateIntervalRepository(Ref ref) =>
     DateIntervalRepository();
 

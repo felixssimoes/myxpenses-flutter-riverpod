@@ -7,12 +7,12 @@ part of 'date_interval.repository.dart';
 // **************************************************************************
 
 String _$dateIntervalRepositoryHash() =>
-    r'6567a2b6bd735b55c219026a6a341ed8e8497424';
+    r'399b960df838f9dc627610ce3df1564e91eee54e';
 
 /// See also [dateIntervalRepository].
 @ProviderFor(dateIntervalRepository)
 final dateIntervalRepositoryProvider =
-    AutoDisposeProvider<DateIntervalRepository>.internal(
+    Provider<DateIntervalRepository>.internal(
   dateIntervalRepository,
   name: r'dateIntervalRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -24,7 +24,6 @@ final dateIntervalRepositoryProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef DateIntervalRepositoryRef
-    = AutoDisposeProviderRef<DateIntervalRepository>;
+typedef DateIntervalRepositoryRef = ProviderRef<DateIntervalRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

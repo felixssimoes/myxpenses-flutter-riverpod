@@ -5,6 +5,6 @@ export 'domain/account.model.dart';
 export 'presentation/create/create_account.screen.dart';
 export 'presentation/details/account_details.screen.dart';
 export 'presentation/details/widgets/category_summary_tile.dart';
-export 'presentation/expenses_list/account_expenses_list.screen.dart';
 export 'presentation/edit/edit_account.screen.dart';
+export 'presentation/expenses_list/account_expenses_list.screen.dart';
 export 'presentation/list/accounts_list.screen.dart';

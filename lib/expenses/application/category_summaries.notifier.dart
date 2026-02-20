@@ -1,5 +1,4 @@
 import 'package:myxpenses/date_interval/date_interval.dart';
-import 'package:myxpenses/expenses/domain/category_summary.model.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

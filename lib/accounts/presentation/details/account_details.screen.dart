@@ -6,8 +6,6 @@ import 'package:myxpenses/date_interval/date_interval.dart';
 import 'package:myxpenses/expenses/application/category_summaries.notifier.dart';
 import 'package:myxpenses/expenses/domain/category_summary.model.dart';
 
-import 'widgets/category_summary_tile.dart';
-
 class AccountDetailsScreen extends ConsumerWidget {
   const AccountDetailsScreen({
     required this.accountId,
