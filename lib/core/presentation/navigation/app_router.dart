@@ -21,6 +21,7 @@ class AppRouter {
   }
 
   final Ref ref;
+  bool _handledInitialNavigation = false;
   late final GoRouter _router;
 
   GoRouter get routerConfig => _router;
@@ -83,8 +84,38 @@ class AppRouter {
       debugLogDiagnostics: true,
       navigatorKey: ref.watch(navigatorKeyProvider),
       initialLocation: Routes.accountsList.path,
-      redirect: (context, state) =>
-          state.matchedLocation == '/' ? Routes.accountsList.path : null,
+      redirect: (context, state) async {
+        if (state.matchedLocation == '/') {
+          return Routes.accountsList.path;
+        }
+
+        final isInitialAccountsNavigation = !_handledInitialNavigation &&
+            state.matchedLocation == Routes.accountsList.path;
+
+        if (!isInitialAccountsNavigation) {
+          return null;
+        }
+
+        _handledInitialNavigation = true;
+
+        final defaultAccountId =
+            await ref.read(defaultAccountIdProvider.future);
+        if (defaultAccountId == null) {
+          return null;
+        }
+
+        final accounts = await ref.read(accountsProvider.future);
+        final accountExists =
+            accounts.any((account) => account.id == defaultAccountId);
+        if (!accountExists) {
+          await ref.read(defaultAccountServiceProvider).clearDefaultAccount();
+          return null;
+        }
+
+        final accountDetailsPath = Routes.accountDetails.path
+            .replaceFirst(':account_id', defaultAccountId);
+        return '${Routes.accountsList.path}/$accountDetailsPath';
+      },
       routes: [
         GoRoute(
           path: Routes.accountsList.path,

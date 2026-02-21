@@ -1,5 +1,7 @@
 export 'application/accounts.notifiers.dart';
 export 'application/accounts.service.dart';
+export 'application/default_account.providers.dart';
+export 'application/default_account.service.dart';
 export 'data/accounts.data.dart';
 export 'domain/account.model.dart';
 export 'presentation/create/create_account.screen.dart';

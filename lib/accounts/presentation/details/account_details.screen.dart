@@ -18,6 +18,7 @@ class AccountDetailsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final accountView = ref.watch(accountViewProvider(accountId));
     final interval = ref.watch(dateIntervalProvider);
+    final defaultAccountId = ref.watch(defaultAccountIdProvider);
 
     final categorySummariesValue = interval == null
         ? const AsyncValue<List<CategorySummary>>.data([])
@@ -31,6 +32,62 @@ class AccountDetailsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(accountView.valueOrNull?.account.name ?? ''),
         actions: [
+          defaultAccountId.when(
+            data: (defaultId) {
+              final isDefault = defaultId == accountId;
+              return IconButton(
+                tooltip: isDefault
+                    ? 'Clear default account'
+                    : 'Set as default account',
+                icon: Icon(
+                  isDefault ? Icons.star : Icons.star_border,
+                ),
+                onPressed: () async {
+                  final messenger = ScaffoldMessenger.of(context);
+                  try {
+                    if (isDefault) {
+                      await ref
+                          .read(defaultAccountServiceProvider)
+                          .clearDefaultAccount();
+                      messenger.showSnackBar(
+                        const SnackBar(
+                          content: Text('Default account cleared'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    await ref
+                        .read(defaultAccountServiceProvider)
+                        .setDefaultAccount(accountId: accountId);
+                    messenger.showSnackBar(
+                      const SnackBar(
+                        content: Text('Default account set'),
+                      ),
+                    );
+                  } catch (error) {
+                    messenger.showSnackBar(
+                      const SnackBar(
+                        content: Text('Could not update default account'),
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+            loading: () => const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: SizedBox.square(
+                dimension: 20,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            ),
+            error: (error, stackTrace) => IconButton(
+              icon: const Icon(Icons.error_outline),
+              tooltip: 'Retry loading default account',
+              onPressed: () => ref.invalidate(defaultAccountIdProvider),
+            ),
+          ),
           IconButton(
             onPressed: () =>
                 ref.read(appRouterProvider).openEditAccount(accountId),

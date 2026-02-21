@@ -33,10 +33,18 @@ class AccountsService {
   }
 
   Future<void> deleteAccount({required AccountModel account}) async {
+    final defaultAccountId = await _ref.read(defaultAccountIdProvider.future);
+    final isDefaultAccount = defaultAccountId == account.id;
+
     await _ref.read(accountsRepositoryProvider).deleteAccount(account);
     await _ref
         .read(expensesRepositoryProvider)
         .deleteAllExpensesForAccount(account.id);
+
+    if (isDefaultAccount) {
+      await _ref.read(defaultAccountServiceProvider).clearDefaultAccount();
+    }
+
     _ref.invalidate(accountsProvider);
     _ref.invalidate(expensesProvider);
     _ref.invalidate(expenseProvider);

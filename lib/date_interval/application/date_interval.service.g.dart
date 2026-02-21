@@ -7,7 +7,7 @@ part of 'date_interval.service.dart';
 // **************************************************************************
 
 String _$dateIntervalServiceHash() =>
-    r'7e104efd8ea681e6f3f8f0829c87764f42047469';
+    r'85376ff6780f7787e838a69a010c9c2264595068';
 
 /// See also [dateIntervalService].
 @ProviderFor(dateIntervalService)
