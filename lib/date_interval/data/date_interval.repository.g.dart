@@ -7,7 +7,7 @@ part of 'date_interval.repository.dart';
 // **************************************************************************
 
 String _$dateIntervalRepositoryHash() =>
-    r'399b960df838f9dc627610ce3df1564e91eee54e';
+    r'25f68e35dfa1db48c9b6528ed669fcbcb5fa83fe';
 
 /// See also [dateIntervalRepository].
 @ProviderFor(dateIntervalRepository)

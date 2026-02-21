@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/core.dart';
-import 'package:myxpenses/expenses/data/expenses.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 
 import 'accounts/accounts_robot.dart';

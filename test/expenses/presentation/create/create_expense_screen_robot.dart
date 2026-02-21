@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/core/core.dart';
-import 'package:myxpenses/expenses/data/expenses.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:myxpenses/expenses/presentation/widgets/expense_amount.dart';
 import 'package:myxpenses/expenses/presentation/widgets/expense_category.dart';
@@ -16,6 +15,7 @@ class CreateExpenseScreenRobot {
     required String accountId,
     required ExpensesRepository repository,
     required AppRouter appRouter,
+    String? category,
   }) async {
     await tester.pumpWidget(
       ProviderScope(
@@ -24,7 +24,10 @@ class CreateExpenseScreenRobot {
           appRouterProvider.overrideWithValue(appRouter),
         ],
         child: MaterialApp(
-          home: CreateExpenseScreen(accountId: accountId),
+          home: CreateExpenseScreen(
+            accountId: accountId,
+            category: category,
+          ),
         ),
       ),
     );
@@ -56,6 +59,12 @@ class CreateExpenseScreenRobot {
     final finder = expectFindExpenseCategoryFormField();
     await tester.enterText(finder, category);
     await tester.pumpAndSettle();
+  }
+
+  String readExpenseCategory() {
+    final finder = expectFindExpenseCategoryFormField();
+    final widget = tester.widget<ExpenseCategoryFormField>(finder);
+    return widget.controller.text;
   }
 
   Future<void> setExpenseAmount(String amount) async {

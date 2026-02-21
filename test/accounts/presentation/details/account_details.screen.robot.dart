@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/accounts.dart';
-import 'package:myxpenses/accounts/presentation/details/widgets/account_expense_tile.dart';
 import 'package:myxpenses/core/core.dart';
 import 'package:myxpenses/date_interval/date_interval.dart';
-import 'package:myxpenses/expenses/data/expenses.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 
 class AccountDetailsScreenRobot {
@@ -19,7 +17,14 @@ class AccountDetailsScreenRobot {
     required AccountsRepository accountsRepository,
     ExpensesRepository? expensesRepository,
     DateInterval? dateInterval,
+    List<CategorySummary>? categorySummaries,
   }) async {
+    if (categorySummaries != null && dateInterval == null) {
+      throw ArgumentError(
+        'dateInterval must be provided when overriding category summaries',
+      );
+    }
+
     await tester.pumpWidget(ProviderScope(
       overrides: [
         appRouterProvider.overrideWithValue(appRouter),
@@ -28,6 +33,11 @@ class AccountDetailsScreenRobot {
           expensesRepositoryProvider.overrideWithValue(expensesRepository),
         if (dateInterval != null)
           dateIntervalProvider.overrideWithValue(dateInterval),
+        if (categorySummaries != null && dateInterval != null)
+          categorySummariesProvider(
+            accountId: accountId,
+            dateInterval: dateInterval,
+          ).overrideWith((ref) async => categorySummaries),
       ],
       child: MaterialApp(
         home: AccountDetailsScreen(accountId: accountId),
@@ -53,9 +63,36 @@ class AccountDetailsScreenRobot {
     return finder;
   }
 
-  void expectFindNExpenses(int n) {
-    final finder = find.byType(AccountExpenseTile);
-    expect(finder, findsNWidgets(n));
+  void expectDateIntervalSelector() {
+    final finder = find.byType(DateIntervalSelector);
+    expect(finder, findsOneWidget);
+  }
+
+  void expectCategoryTileCount(int count) {
+    final tileCount = find.byType(CategorySummaryTile).evaluate().length;
+    expect(tileCount, count);
+  }
+
+  void expectCategoryTile({
+    required int index,
+    required String categoryName,
+    required String expenseLabel,
+    required String totalText,
+  }) {
+    final tileFinder = find.byType(CategorySummaryTile).at(index);
+    expect(tileFinder, findsOneWidget);
+    expect(
+      find.descendant(of: tileFinder, matching: find.text(categoryName)),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(of: tileFinder, matching: find.text(expenseLabel)),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(of: tileFinder, matching: find.text(totalText)),
+      findsOneWidget,
+    );
   }
 
   void expectAccountTotal(String total) {
@@ -63,6 +100,13 @@ class AccountDetailsScreenRobot {
     expect(finder, findsOneWidget);
     final textWidget = tester.widget<Text>(finder);
     expect(textWidget.data, total);
+  }
+
+  CategorySummary categorySummaryAt(int index) {
+    final tileFinder = find.byType(CategorySummaryTile).at(index);
+    expect(tileFinder, findsOneWidget);
+    final tile = tester.widget<CategorySummaryTile>(tileFinder);
+    return tile.summary;
   }
 
   Future<void> tapEditAccount() async {
@@ -77,10 +121,22 @@ class AccountDetailsScreenRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapExpenseTile(int index) async {
-    final finder = find.byType(AccountExpenseTile).at(index);
+  Future<void> tapCategoryTileAt(int index) async {
+    final finder = find.byType(CategorySummaryTile).at(index);
     expect(finder, findsOneWidget);
     await tester.tap(finder);
     await tester.pumpAndSettle();
   }
+
+  Future<void> tapCategoryTileByName(String categoryName) async {
+    final finder = find.widgetWithText(CategorySummaryTile, categoryName);
+    expect(finder, findsOneWidget);
+    await tester.tap(finder);
+    await tester.pumpAndSettle();
+  }
+
+  // Backwards compatibility with older robot calls
+  void expectFindNExpenses(int n) => expectCategoryTileCount(n);
+
+  Future<void> tapExpenseTile(int index) => tapCategoryTileAt(index);
 }

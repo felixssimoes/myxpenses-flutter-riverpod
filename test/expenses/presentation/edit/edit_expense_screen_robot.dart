@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/core/presentation/navigation/app_router.dart';
-import 'package:myxpenses/expenses/data/expenses.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 import 'package:myxpenses/expenses/presentation/widgets/expense_amount.dart';
 import 'package:myxpenses/expenses/presentation/widgets/expense_category.dart';

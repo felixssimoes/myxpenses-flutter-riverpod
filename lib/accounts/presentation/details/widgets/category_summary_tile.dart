@@ -29,7 +29,7 @@ class CategorySummaryTile extends StatelessWidget {
             .textTheme
             .titleMedium
             ?.copyWith(fontWeight: FontWeight.w700)
-        : Theme.of(context).textTheme.titleMedium;
+        : null;
 
     return ListTile(
       title: Text(categoryName, style: titleStyle),

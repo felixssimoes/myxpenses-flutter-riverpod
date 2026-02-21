@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:myxpenses/accounts/accounts.dart';
 import 'package:myxpenses/accounts/presentation/widgets/account_name_form_field.dart';
 import 'package:myxpenses/core/core.dart';
-import 'package:myxpenses/expenses/data/expenses.repository.dart';
 import 'package:myxpenses/expenses/expenses.dart';
 
 class EditAccountScreenRobot {
