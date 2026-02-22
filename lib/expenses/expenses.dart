@@ -2,6 +2,7 @@ export 'application/category_summaries.notifier.dart';
 export 'application/expenses.notifiers.dart';
 export 'application/expenses.service.dart';
 export 'data/expenses.data.dart';
+export 'data/expenses.repository.dart';
 export 'data/memory_expenses.repository.dart';
 export 'domain/category_summary.model.dart';
 export 'domain/expense.model.dart';

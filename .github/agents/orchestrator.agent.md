@@ -49,14 +49,25 @@ Output your execution plan like this:
   Files: src/App.tsx
 ```
 
-### Step 3: Execute Each Phase
+### Step 3: Discuss plan with user
+**MANDATORY STEP - EXPLICIT APPROVAL REQUIRED**
+1. Present the execution plan to the user
+2. Ask clarifying questions about any ambiguities
+3. **WAIT for explicit user confirmation** (phrases like "approved", "proceed", "go ahead", "looks good")
+4. Do NOT proceed to Step 4 without clear approval
+5. If user requests significant changes to approach or requirements,
+   call Planner again with updated requirements
+6. For minor adjustments (file names, ordering, skipped tasks),
+   update the execution plan directly
+
+### Step 4: Execute Each Phase
 For each phase:
 1. **Identify parallel tasks** — Tasks with no dependencies on each other
 2. **Spawn multiple subagents simultaneously** — Call agents in parallel when possible
 3. **Wait for all tasks in phase to complete** before starting next phase
 4. **Report progress** — After each phase, summarize what was completed
 
-### Step 4: Verify and Report
+### Step 5: Verify and Report
 After all phases complete, verify the work hangs together and report results.
 
 ## Parallelization Rules

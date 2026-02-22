@@ -1,5 +1,4 @@
 import '../expenses.dart';
-import 'expenses.repository.dart';
 
 class InMemoryExpensesRepository implements ExpensesRepository {
   final List<ExpenseModel> _expenses = [];
@@ -43,7 +42,7 @@ class InMemoryExpensesRepository implements ExpensesRepository {
   Future<ExpenseModel?> loadExpense({required String id}) async {
     final index = _expenses.indexWhere((a) => a.id == id);
     if (index == -1) {
-      throw Exception('Expense not found');
+      return null;
     }
     return _expenses[index];
   }

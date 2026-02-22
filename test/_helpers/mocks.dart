@@ -18,7 +18,7 @@ class MockVoidCallback extends Mock {
 }
 
 class Listener<T> extends Mock {
-  void call(T? previous, T next);
+  void call(T? previous, T? next);
 }
 
 AccountModel mockAccountModel({

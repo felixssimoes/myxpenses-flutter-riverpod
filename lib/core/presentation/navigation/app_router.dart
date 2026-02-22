@@ -46,7 +46,7 @@ class AppRouter {
   }
 
   void openAccountExpenses(String accountId, {String? category}) {
-    _router.pushNamed(
+    _router.goNamed(
       Routes.accountExpenses.name,
       pathParameters: {'account_id': accountId},
       queryParameters:

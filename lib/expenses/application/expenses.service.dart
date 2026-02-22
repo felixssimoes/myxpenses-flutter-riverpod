@@ -30,7 +30,10 @@ class ExpensesService {
     await _validateExpense(expense);
     await _ref.read(expensesRepositoryProvider).insertExpense(expense);
     _invalidateExpenseRelatedProviders(
-        accountId: accountId, category: category);
+      accountId: accountId,
+      category: category,
+      expenseId: expense.id,
+    );
     return expense;
   }
 
